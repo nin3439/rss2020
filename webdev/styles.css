@@ -1,0 +1,177 @@
+.sheet {
+  max-width: 1600px;
+  font-family: 'Roboto', sans-serif;
+}
+.screen1 {
+  position: absolute;
+   width: 1600px;
+  height: 744px;
+  left: 0px;
+  top: 0px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(ales-nesetril-Im7lZjxeLhg-unsplash.jpg);
+  background-image: url(./assets/bg-image.png);
+}
+.vissualy-hidden {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+}
+.head {
+  width: 1600px;
+  height: 95px;
+}
+.logo-header {
+  position: absolute;
+  width: 44px;
+  height: 45px;
+  left: 778px;
+  top: 25px
+}
+/* .about {
+  color: #fff;
+  text-decoration: underline;
+  opacity: 1.0;
+} */
+.navigation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 38px 515px 0 462px;
+  list-style: none;
+  color: #fff;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 140%;
+  opacity: 0.8;
+}
+.navigation-items:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: bold;
+}
+.text-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #FFFFFF;
+}
+.block-your-life {
+  font-size: 64px;
+  letter-spacing: 4.5px;
+  text-transform: uppercase;
+  padding-top: 33px;
+  padding-left: 3px;
+  text-align: center;
+  line-height: 75px;
+  font-weight: bold;
+}
+.subtitle {
+  font-size: 18px;
+  text-align: center;
+  width: 504px;
+  line-height: 140%;
+  margin-top: -42px;
+}
+.btn-main {
+  width: 184px;
+  height: 46px;
+  background: #00AFDB;
+  padding: 15px 47px;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  border: none;
+  margin-top: 10px;S
+}
+.btn-main:hover {
+  background: #009CC2;
+  cursor: pointer;
+  border: none;
+}
+.text-btn-main {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+  color: #FFF;
+  width: 94px;
+  height: 16px;
+  letter-spacing: -0.5px;
+}
+.socials {
+  display: flex;
+  justify-content: space-around;
+  width: 200px;
+  height: 20px;
+  margin: 183px 0px 0px 700px;
+}
+.socials:hover {
+  cursor: pointer;
+}
+.screen2 {
+  position: absolute;
+  width: 1600px;
+  height: 842px;
+  left: 0px;
+  top: 744px;
+  background-color: #fff;
+}
+.screen2-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.content-block1 {
+  width: 405px;
+  height: 233px;
+  margin: 77px 0px 0px 268px;
+}
+.content1-header {
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  text-transform: uppercase;
+  color: #373737;
+  letter-spacing: 1px;
+  width: 377px;
+}
+.content1-paragraph {
+  font-size: 14px;
+  line-height: 140%;
+  color: #4E4E4E;
+  padding-top: 3px;
+}
+.btn-content1 {
+  width: 184px;
+  height: 46px;
+  background: #00AFDB;
+  margin-top: 17px;
+  border: none;
+}
+.btn-content1:hover {
+  background: #009CC2;
+  cursor: pointer;
+}
+.text-btn-content1 {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+  color: #FFF;
+  width: 94px;
+  height: 16px;
+  padding: 13px 40px;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+}
+.content-image1 {
+  width: 407px;
+  height: 582px;
+  margin: 120px 270px 0 0;
+}
