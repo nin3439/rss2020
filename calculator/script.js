@@ -10,7 +10,8 @@ const minusBtn = document.getElementById('minus');
 let isNegativeNumber = false;
 let memoryCurrentNumber = 0;
 let memoryPendingOperation = '';
-let memoryNewNumber = false;
+let isWaitNextNumber = false;
+let memoryPreviosClick = '';
 
 
 for (let i = 0; i < numbers.length; i++) {
@@ -46,25 +47,33 @@ function sqrtOperation() {
 }
 
 function numberPress(number) {
-  console.log(number, display.value);
-  if (memoryNewNumber) {
-    display.value = number;
-    memoryNewNumber = false;
+  let localNumber = display.value;
+  memoryPreviosClick = 'number';
+  if (isWaitNextNumber) {
+    localNumber = number;
+    isWaitNextNumber = false;
   } else {
     if (display.value === "0") {
-      display.value = number;
+      localNumber = number;
     } else {
-      display.value += number;
+      localNumber += number;
     }
   };
+  if (isNegativeNumber) {
+    localNumber = '-' + localNumber;
+    isNegativeNumber = false;
+  }
+  display.value = localNumber;
 };
 
 function operation(op) {
+  memoryPreviosClick = 'operation';
   let localOperationMemory = display.value;
-  if (memoryNewNumber && memoryPendingOperation !== '=') {
+  if (isWaitNextNumber && memoryPendingOperation !== '=') {
     display.value = memoryCurrentNumber;
   } else {
-    memoryNewNumber = true;
+    isWaitNextNumber = true;
+    console.log(memoryCurrentNumber, localOperationMemory)
     switch (memoryPendingOperation) {
       case '+':
         memoryCurrentNumber = (parseFloat(localOperationMemory) * 1000 + parseFloat(memoryCurrentNumber) * 1000) / 1000;
@@ -91,9 +100,9 @@ function operation(op) {
 
 function decimal() {
   let localDecimalMemory = display.value;
-  if (memoryNewNumber) {
+  if (isWaitNextNumber) {
     localDecimalMemory = '0.';
-    memoryNewNumber = false;
+    isWaitNextNumber = false;
   } else {
     if (localDecimalMemory.indexOf() === -1)
       localDecimalMemory += '.';
@@ -104,27 +113,32 @@ function decimal() {
 function clear(id) {
   if (id === 'ce') {
     display.value = "0";
-    memoryNewNumber = true;
+    isWaitNextNumber = true;
   } else if (id === 'c') {
     display.value = "0";
-    memoryNewNumber = false;
+    isWaitNextNumber = false;
     memoryCurrentNumber = "0";
     memoryPendingOperation = "0";
+    memoryPreviosClick = '';
+    isNegativeNumber = false;
   }
 };
 
-function minus() {
-  let localOperationMemory = display.value;
-  if (!memoryNewNumber) {
-    isNegativeNumber = true;
 
-  }
-  if (memoryNewNumber && memoryPendingOperation !== '=') {
-    display.value = memoryCurrentNumber;
-  } else {
-    memoryNewNumber = true;
-    memoryCurrentNumber -= parseFloat(localOperationMemory);
-    display.value = memoryCurrentNumber;
-    memoryPendingOperation = '-';
-  };
-}
+// function minus() {
+//   let localOperationMemory = display.value;
+//   if (memoryPreviosClick === 'number') {
+//     if (isWaitNextNumber && memoryPendingOperation !== '=') {
+//       display.value = memoryCurrentNumber;
+//     } else {
+//       isWaitNextNumber = true;
+//       memoryCurrentNumber -= parseFloat(localOperationMemory);
+//       display.value = memoryCurrentNumber;
+//       memoryPendingOperation = '-';
+//     };
+//   } else {
+//     isNegativeNumber = true;
+//   }
+//   console.log(isNegativeNumber);
+
+// }
