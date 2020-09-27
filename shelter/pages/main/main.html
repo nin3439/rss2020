@@ -5,28 +5,84 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="/pages/main/main.css">
+  <link href="main.css" rel="stylesheet">
   <title>shelter</title>
 </head>
+
 <body>
-  <div class="wrapper">
-    <div class="start-screen">
-      <header >
-          <div class="logo">
-              <div >Cozy House</div>
-              <div></div>
+  <div class="header-hero-wrapper-background">
+    <div class="header-hero-wrapper-content">
+      <header class="header">
+        <div class="logo">
+          <div class="logo__title">
+            Cozy House
           </div>
-          <nav>
-                <ul class>
-                    <li class="navigation-item">About the shelter</li>
-                    <li class="navigation-item">Our pets</li>
-                    <li class="navigation-item">Help the shalter</li>
-                    <li class="navigation-item">Contacts</li>
-                </ul>
+          <div class="logo__subtitile">
+            Shelter for pets in Boston
+          </div>
+        </div>
+        <nav class="menu">
+          <ul class="list">
+            <li class="list__item">
+              <a class="list__link list__link-active">
+                About the shelter
+              </a>
+            </li>
+            <li class="list__item">
+              <a class="list__link list__link-disabled">
+                Our pets
+              </a>
+            </li>
+            <li class="list__item">
+              <a class="list__link list__link-disabled">
+                Help the shalter
+              </a>
+            </li>
+            <li class="list__item">
+              <a class="list__link list__link-disabled">
+                Contacts
+              </a>
+            </li>
+          </ul>
+        </nav>
 
-          </nav>
       </header>
-
+      <main class="main">
+        <div class="hero">
+          <div class="hero__content">
+            <div class="content-section">
+              <h2 class="content-section__title">
+                Not only people need a house
+              </h2>
+              <p class="content-section__subtitle">
+                We offer to give a chance to a little and nice puppy with an extremely wide and open heart. He or she will love you more than anybody else in the world, you will see!
+              </p>
+              <button type="button" class="content-section__button">
+                <span class="content-section__button__text">
+                    Make a friend
+                </span>
+              </button>
+            </div>
+            <img src="../../assets/images/start-screen-puppy.png" alt="First Puppy" class="hero__image" />
+          </div>
+        </div>
     </div>
   </div>
+  <div class="about">
+    <div class="about__content">
+      <img src="../../assets/images/about-pets.png" alt="About Pets" />
+      <div class="about__content__section">
+        <h2 class="about__content__section__title">About the shelter “Cozy House”</h2>
+        <p class="about__content__section__subtitle">Currently we have 121 dogs and 342 cats on our hands and statistics show that only 20% of them will find a family. The others will continue to live with us and will be waiting for a lucky chance
+          to
+          become dearly loved.</p>
+        <p class="about__content__section__subtitle">We feed our wards with the best food and make sure that they do not get sick, feel comfortable (including psychologically) and well. We are supported by 87 volunteers and 28 employees of various
+          skill levels. About 12% of the animals are taken by the shelter staff. Taking care of the animals, they become attached to the pets and would hardly ever leave them alone.</p>
+      </div>
+    </div>"
+  </div>
+
+
+  </main>
+
 </body>
