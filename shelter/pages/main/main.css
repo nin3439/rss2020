@@ -86,9 +86,6 @@ body {
   border-bottom: 3px solid #f1cdb3;
 }
 
-.list__link-active:hover{
- cursor: pointer;
-}
 
 .list__link-disabled {
   color: #cdcdcd;
@@ -256,7 +253,7 @@ body {
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -264,13 +261,17 @@ body {
   border: 2px solid #f1cdb3;
   box-sizing: border-box;
   border-radius: 100px;
-  padding: 23px 0px 0px 19px;
+  padding: 23px 0px 0px 17px;
   width: 52px;
   height: 52px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   background: #f6f6f6;
+}
+
+.arrow__image {
+margin-top: -2px;
 }
 
 .arrows:hover {
@@ -289,7 +290,8 @@ body {
   align-items: center;
   background: #fafafa;
   border-radius: 9px;
-  padding: 30px 41.5px 30px 41.5px;
+  padding: 0 41.5px 30px 41.5px;
+  margin: 0 37px;
 }
 
 .card__text {
@@ -300,6 +302,8 @@ body {
   line-height: 23px;
   color: #545454;
   letter-spacing: 0.06em;
+  margin-left: 2px;
+  margin-top: -2px;
 }
 
 .card__button {
@@ -332,6 +336,7 @@ body {
   line-height: 130%;
   color: #292929;
   letter-spacing: 0.06em;
+  margin: -2px;
 }
 
 .card:hover {
@@ -387,7 +392,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding-top: 80px;
-  padding-bottom: 94px;
+  padding-bottom: 64px;
 }
 
 .help__title {
@@ -415,12 +420,12 @@ body {
 
 .help-icons {
   height: 113px;
-  width: 200px;
+  width: 170px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  margin: 20px;
+  margin: 19px 40px 36px 24px;
 }
 .help-icons-text {
   font-family: Georgia;
@@ -448,17 +453,14 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding-top: 80px;
-  padding-bottom: 100px;
+  padding: 82px 0 101px 222px
+}
 
-}
-.d {
-  height: 284px;
-}
 .donation__content__section {
-  height: 100%;
-  display: grid;
-  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-top: -2px;
+  margin-left: 30px;
 }
 .donation__content__section__title {
   font-family: Georgia;
@@ -471,6 +473,7 @@ body {
   letter-spacing: 0.06em;
   color: #545454;
   width: 300px;
+  margin-bottom: 20px;
 }
 .donation__content__section__subtitle {
   font-family: Georgia;
@@ -482,6 +485,7 @@ body {
   align-items: center;
   letter-spacing: 0.06em;
   color: #545454;
+  margin-bottom: 20px;
 }
 .donation__content__section__button {
   display: flex;
@@ -492,6 +496,7 @@ body {
   width: 349px;
   height: 43px;
   padding: 10px 0px 0px 15px;
+  margin-bottom: 20px;
 }
 
 .donation__content__section__button:focus{
@@ -512,7 +517,7 @@ body {
 }
 
 .donation__content__section__number{
-  margin-left: 10px;
+  margin-left: 15px;
 }
 .donation__content__section__comment {
   font-family: Arial;
@@ -525,6 +530,7 @@ body {
   color: #b2b2b2;
   width: 380px;
 }
+
 .footer {
   width: 100%;
   background: url(../../assets/images/noise_transparent@2X.png),
@@ -535,13 +541,16 @@ body {
 .footer__content {
   max-width: 1200px;
   display: grid;
+  grid-gap: 160px;
   grid-template-columns: 1fr 1fr 1fr;
-  padding: 40px;
+  margin: 0 auto;
+  padding-top: 41px;
 }
 
 .footer__content-section {
-  display: grid;
-  padding-bottom: 70px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 16px;
 }
   
 .footer__content-section__title {
@@ -558,6 +567,10 @@ body {
   margin-left: 20px;
 }
 
+.footer-section-two {
+margin-left: -21px;
+}
+
 .footer__content-section__link {
   text-decoration: none;
   display: flex;
@@ -569,4 +582,10 @@ body {
   line-height: 115%;
   letter-spacing: 0.06em;
   color: #F1CDB3;
+  margin-top: 39px;
 }
+
+.footer-section-two-link {
+  margin-top: 32px;
+}
+
