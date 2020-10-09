@@ -3,94 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
   <title>calculator</title>
 </head>
 
 <body>
-  <main class="main">
-      <div class="calc">
-        <div class="calc-display">
-          <input disabled type="text" id="display" value="0" name="" placeholder="000000000000000000" class="calc-display-input">
-        </div>
-        <div class="calc-buttons">
-          <table class="calc-table">
-            <tr class="calc-buttons-row">
-              <td>
-                <button type="button" class="clear-btn btn btn-hover-red" id="ce">ce</button>
-              </td>
-              <td>
-                <button type="button" class="clear-btn btn btn-hover-red" id="c">c</button>
-              </td>
-              <td>
-                <button type="button" class="operator btn btn-hover-orange">/</button>
-              </td>
-              <td>
-                <button type="button" class=" operator btn btn-hover-orange">*</button>
-              </td>
-            </tr>
-            <tr class="calc-buttons-row">
-              <td>
-                <button type="button" class="number btn-hover-green btn">7</button>
-              </td>
-              <td>
-                <button type="button" class="number btn-hover-green btn">8</button>
-              </td>
-              <td>
-                <button type="button" class="number btn-hover-green btn">9</button>
-              </td>
-              <td>
-                <button type="button" class="operator btn btn-hover-orange" id="minus">-</button>
-              </td>
-            </tr>
-            <tr class="calc-buttons-row">
-              <td>
-                <button type="button" class="number btn-hover-green btn">4</button>
-              </td>
-              <td>
-                <button type="button" class="number btn-hover-green btn">5</button>
-              </td>
-              <td>
-                <button type="button" class="number btn-hover-green btn">6</button>
-              </td>
-              <td>
-                <button type="button" class="operator btn btn-hover-orange">+</button>
-              </td>
-            </tr>
-            <tr class="calc-buttons-row">
-              <td>
-                <button type="button" class="number btn-hover-green btn">1</button>
-              </td>
-              <td>
-                <button type="button" class="number btn-hover-green btn">2</button>
-              </td>
-              <td>
-                <button type="button" class="number btn-hover-green btn">3</button>
-              </td>
-              <td>
-                <button type="button" class="operator btn btn-hover-orange" id="sqrt">√</button>
-              </td>
-
-            </tr>
-            <tr class="calc-buttons-row">
-              <td>
-                <button type="button" class="number btn-hover-green btn">0</button>
-              </td>
-              <td>
-                <button type="button" class="btn btn-hover-orange" id="decimal">.</button>
-              </td>
-              <td>
-                <button type="button" class="operator btn btn-hover-orange" id="result">=</button>
-              </td>
-              <td>
-                <button type="button" class="operator btn btn-hover-orange">^</button>
-              </td>
-            </tr>
-          </table>
+    <div class="container">
+        <div class="calculator">
+          <div class="calculator__display">0</div>
+          <div class="calculator__keys">
+            <button class="key-operator" data-action="add">+</button>
+            <button class="key-operator" data-action="subtract">-</button>
+            <button class="key-operator" data-action="multiply">&times;</button>
+            <button class="key-operator" data-action="divide">÷</button>
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button class="key-operator" data-action="power">^</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button class="key-operator" data-action="square-root">√</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>0</button>
+            <button data-action="decimal">.</button>
+            <button data-action="clear">AC</button>
+            <button class="key-equal" data-action="calculate">=</button>
+          </div>
         </div>
       </div>
-  </main>
-  <script src="script.js">
-  </script>
 </body>
 </html>

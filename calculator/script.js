@@ -1,150 +1,92 @@
-const numbers = document.querySelectorAll('.number');
-const operations = document.querySelectorAll('.operator');
-const decimalBtn = document.getElementById('decimal');
-const clearBtns = document.querySelectorAll('.clear-btn')
-const resultBtn = document.getElementById('result');
-const display = document.getElementById('display');
-const sqrtBtn = document.getElementById('sqrt');
-const minusBtn = document.getElementById('minus');
-
-let isNegativeNumber = false;
-let memoryCurrentNumber = 0;
-let memoryPendingOperation = '';
-let isWaitNextNumber = false;
-let memoryPreviosClick = '';
+const calculator = document.querySelector(".calculator");
+const keys = calculator.querySelector(".calculator__keys");
+const display = document.querySelector(".calculator__display");
 
 
-for (let i = 0; i < numbers.length; i++) {
-  let number = numbers[i];
-  number.addEventListener('click', function(e) {
-    numberPress(e.target.textContent)
-  });
+keys.addEventListener('click', function(e) {
+    if (e.target.matches('button')) {
+        const key = e.target;
+        const action = key.dataset.action;
+        const keyContent = key.textContent;
+        const displayedNum = display.textContent;
+        const previousKeyType = calculator.dataset.previousKeyType;
+
+        if (!action) {
+            if (displayedNum === '0' || previousKeyType === 'operator') {
+                display.textContent = keyContent;
+            } else {
+                display.textContent = displayedNum + keyContent;
+            }
+            calculator.dataset.previousKeyType = 'number';
+        };
+        if ( 
+            action === "add" || 
+            action === "subtract" || 
+            action === "multiply" || 
+            action === "divide" || 
+            action === "power" || 
+            action === "square-root" 
+        )  {
+            const firstValue = calculator.dataset.firstValue;
+            const operator = calculator.dataset.operator;
+            const secondValue = displayedNum;
+
+            if(firstValue && operator && previousKeyType !== 'operator') {
+              const calcValue = calculate(firstValue, operator, secondValue);
+              display.textContent = calcValue;
+              calculator.dataset.firstValue = calcValue;
+            } else {
+              calculator.dataset.firstValue = displayedNum;
+            }
+
+          key.classList.add('is-depressed');
+            calculator.dataset.previousKeyType = 'operator';
+            calculator.dataset.operator = action;
+        }
+
+        if (action === 'decimal') {
+            if (!displayedNum.includes('.')) {
+              display.textContent = displayedNum + '.';
+            } else if (previousKeyType === 'operator') {
+              display.textContent = '0.';
+            }
+            calculator.dataset.previousKeyType = 'decimal';
+        }
+          
+        if (action === 'clear') {
+            calculator.dataset.previousKeyType = 'clear';
+        }
+        
+        if (action === 'calculate') {
+            
+            const firstValue = calculator.dataset.firstValue;
+            const operator = calculator.dataset.operator;
+            const secondValue = displayedNum;
+
+            display.textContent = calculate(firstValue, operator, secondValue);
+            calculator.dataset.previousKeyType = 'calculate'
+        }
+
+
+        Array.from(key.parentNode.children).forEach(k => k.classList.remove('is-depressed'));
+        
 };
+});
 
-for (let i = 0; i < operations.length; i++) {
-  let operationBtn = operations[i];
-  operationBtn.addEventListener('click', function(e) {
-    operation(e.target.textContent)
-  });
-};
-
-for (let i = 0; i < clearBtns.length; i++) {
-  let clearBtn = clearBtns[i];
-  clearBtn.addEventListener('click', function(e) {
-    clear(e.srcElement.id)
-  });
-};
-sqrtBtn.addEventListener('click', sqrtOperation)
-
-decimalBtn.addEventListener('click', decimal);
-
-resultBtn.addEventListener('click', operation);
-
-minusBtn.addEventListener('click', minus);
-
-function sqrtOperation() {
-  display.value = Math.sqrt(memoryCurrentNumber);
-  isWaitNextNumber = false;
-}
-
-function numberPress(number) {
-  let localNumber = display.value;
-  memoryPreviosClick = 'number';
-  if (isWaitNextNumber) {
-    localNumber = number;
-    isWaitNextNumber = false;
-  } else {
-    if (display.value === "0") {
-      localNumber = number;
-    } else {
-      localNumber += number;
+function calculate(n1, operator, n2) {
+    let result = "";
+    if (operator === 'add') {
+        result = (parseFloat(n1*1000) + parseFloat(n2*1000)) / 1000;
+    } else if (operator === 'subtract') {
+        result = parseFloat(n1) - parseFloat(n2);
+    } else if (operator === 'multiply') {
+        result = parseFloat(n1) * parseFloat(n2);
+    } else if (operator === 'divide') {
+        result = parseFloat(n1) / parseFloat(n2);
+    } else if (operator === 'power') {
+        result = Math.pow(parseFloat(n1), parseFloat(n2));
+    } else if (operator === 'square-root') {
+        result = Math.sqrt(parseFloat(n1));
     }
-  };
-  if (isNegativeNumber) {
-    if (display.value === "0") {
-      localNumber = '-' + localNumber;
-    } else {
-      localNumber = localNumber * -1;
-      isNegativeNumber = false;
-    }
-  }
-  display.value = localNumber;
-};
-
-function operation(op) {
-
-  memoryPreviosClick = 'operation';
-  let localOperationMemory = display.value;
-  if (isWaitNextNumber && memoryPendingOperation !== '=') {
-    display.value = memoryCurrentNumber;
-  } else {
-    isWaitNextNumber = true;
-    console.log(memoryCurrentNumber, localOperationMemory)
-    switch (memoryPendingOperation) {
-      case '+':
-        memoryCurrentNumber = (parseFloat(localOperationMemory) * 1000 + parseFloat(memoryCurrentNumber) * 1000) / 1000;
-        break;
-      // case '-':
-      //   memoryCurrentNumber -= parseFloat(localOperationMemory);
-      //   break;
-      case '/':
-        memoryCurrentNumber /= parseFloat(localOperationMemory);
-        break;
-      case '*':
-        memoryCurrentNumber *= parseFloat(localOperationMemory);
-        break;
-      case '^':
-        memoryCurrentNumber = memoryCurrentNumber ** localOperationMemory;
-        break;
-      default:
-        memoryCurrentNumber = parseFloat(localOperationMemory);
-    }
-    display.value = memoryCurrentNumber;
-    memoryPendingOperation = op;
-  };
-};
-
-function decimal() {
-  let localDecimalMemory = display.value;
-  if (isWaitNextNumber) {
-    localDecimalMemory = '0.';
-    isWaitNextNumber = false;
-  } else {
-    if (localDecimalMemory.indexOf('.') === -1)
-      localDecimalMemory += '.';
-  }
-  display.value = localDecimalMemory;
-};
-
-function clear(id) {
-  if (id === 'ce') {
-    display.value = "0";
-    isWaitNextNumber = true;
-  } else if (id === 'c') {
-    display.value = "0";
-    isWaitNextNumber = false;
-    memoryCurrentNumber = "0";
-    memoryPendingOperation = "0";
-    memoryPreviosClick = '';
-    isNegativeNumber = false;
-  }
-};
-
-
-function minus() {
-  let localOperationMemory = display.value;
-  if (memoryPreviosClick === 'number') {
-    if (isWaitNextNumber && memoryPendingOperation !== '=') {
-      display.value = memoryCurrentNumber;
-    } else {
-      isWaitNextNumber = true;
-      memoryCurrentNumber -= parseFloat(localOperationMemory);
-      display.value = memoryCurrentNumber;
-      memoryPendingOperation = '-';
-    };
-  } else {
-    isNegativeNumber = true;
-  }
-  console.log(isNegativeNumber);
-
+    return result;
 }
