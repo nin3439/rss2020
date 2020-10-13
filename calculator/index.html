@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+  <title>calculator</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="calculator">
+          <div class="calculator__display">0</div>
+          <div class="calculator__keys">
+            <button class="key-operator" data-action="add">+</button>
+            <button class="key-operator" data-action="subtract">-</button>
+            <button class="key-operator" data-action="multiply">&times;</button>
+            <button class="key-operator" data-action="divide">÷</button>
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button class="key-operator" data-action="power">^</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button class="key-operator" data-action="square-root">√</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button class="uno-minus" data-action="uno-minus">+/-</button>
+            <button data-action="decimal">.</button>
+            <button>0</button>
+            <button data-action="clear">AC</button>
+            <button class="key-equal" data-action="calculate">=</button>
+          </div>
+        </div>
+      </div>
+      <div>
+       <p class="comment"> Всем привет! <br> Спасибо, что оценили мой калькулятор!</p> 
+       <div class="instruction">
+        <p class="title"> Инструкция:</p>
+        <ul class="list">
+          <li>Для удаления последнего значения необходимо нажать кнопку <b>CE</b>. Для очищения всей памяти — <b>AC</b>; </li>
+          <li> Для того, чтобы начать <b>новую операцию</b> сначала необходимо полностью очистить память (нажать CE, а затем AC); </li>
+          <li> Унарный минус (кнопка <b>+/-</b>) необходимо нажимать <span class="text">после ввода числа</span>;</li>
+          <li> Для вычисления <b>квадратного корня</b> следует ввести число, затем <b>√</b>  и обязательно кнопку <b>=</b>.</li>
+        </ul>
+       </div>
+      </div>
+</body>
+</html>
