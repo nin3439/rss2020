@@ -36,7 +36,7 @@ keys.addEventListener('click', function (e) {
       const operator = calculator.dataset.operator;
       const secondValue = displayedNum;
 
-      if ( action === "square-root" && previousKeyType === 'uno-minus') {
+      if (action === "square-root" && previousKeyType === 'uno-minus') {
         display.textContent = 'Error';
       } else if (
         firstValue &&
@@ -57,11 +57,11 @@ keys.addEventListener('click', function (e) {
     }
 
     if (action === 'uno-minus') {
-      if (!displayedNum.includes('-') || !displayedNum === '0' ) {
+      if (!displayedNum.includes('-') || !displayedNum === '0') {
         display.textContent = '-' + displayedNum;
-        } else if (displayedNum.includes('-')) {
-          display.textContent = display.textContent.split('-').join('');
-        }
+      } else if (displayedNum.includes('-')) {
+        display.textContent = display.textContent.split('-').join('');
+      }
       calculator.dataset.previousKeyType = 'uno-minus';
     }
 
@@ -105,7 +105,7 @@ keys.addEventListener('click', function (e) {
           firstValue = displayedNum;
           secondValue = calculator.dataset.modValue;
         }
-        display.textContent = calculate(firstValue, operator, secondValue); 
+        display.textContent = calculate(firstValue, operator, secondValue);
       }
       calculator.dataset.modValue = secondValue;
       calculator.dataset.previousKeyType = 'calculate';
