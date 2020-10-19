@@ -37,7 +37,7 @@ body {
   margin-top: -15px;
 }
 
-.hamburger-menu{
+.hamburger-menu {
   display: none;
 }
 
@@ -192,7 +192,7 @@ body {
 }
 
 .about__content__title {
-  width: 370px;
+  max-width: 370px;
   height: 90px;
   font-family: Georgia;
   font-style: normal;
@@ -204,7 +204,7 @@ body {
 }
 
 .about__content__subtitle {
-  width: 430px;
+  max-width: 430px;
   font-family: Arial;
   font-style: normal;
   font-weight: normal;
@@ -383,7 +383,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 80px 0 65px 2px;
+  padding: 80px 0 100px 2px;
 }
 
 .help__title {
@@ -401,22 +401,23 @@ body {
 }
 
 .help__container {
-  padding-top: 40px;
+  padding-top: 60px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  column-gap: 120px;
+  row-gap: 55px;
 }
 
-.help-icons {
-  height: 113px;
-  width: 170px;
+.help-icon {
+  height: 112px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  margin: 18px 30px 36px 30px;
 }
+
 .help-icons-text {
   font-family: Georgia;
   font-style: normal;
@@ -442,6 +443,7 @@ body {
   margin-top: -1px;
   margin-left: 30px;
 }
+
 .donation__content__title {
   font-family: Georgia;
   font-style: normal;
@@ -452,9 +454,11 @@ body {
   align-items: center;
   letter-spacing: 0.06em;
   color: #545454;
-  width: 300px;
+  max-width: 300px;
   margin-bottom: 20px;
 }
+
+
 .donation__content__subtitle {
   font-family: Georgia;
   font-style: normal;
@@ -467,6 +471,7 @@ body {
   color: #545454;
   margin-bottom: 20px;
 }
+
 .donation__content__button {
   display: flex;
   flex-direction: row;
@@ -499,6 +504,7 @@ body {
 .donation__content__number {
   margin-left: 15px;
 }
+
 .donation__content__comment {
   font-family: Arial;
   font-style: italic;
@@ -508,7 +514,7 @@ body {
   display: flex;
   align-items: center;
   color: #b2b2b2;
-  width: 380px;
+  max-width: 380px;
 }
 
 .background-footer {
@@ -520,8 +526,9 @@ body {
 .footer__content {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   padding-top: 40px;
+  column-gap: 119px;
 }
 
 .footer__content-section {
@@ -567,35 +574,38 @@ body {
   margin-top: 32px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1199px) {
   .header-hero-wrapper-content {
-    max-width: 828px;
+    min-width: 828px;
     padding: 0 60px;
     margin: -30px;
   }
 
   .hero__content {
-    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
     justify-content: center;
     padding-bottom: 29px;
   }
+
   .hero__content-section {
     justify-content: center;
     padding-right: 0;
   }
+
   .hero-button-768 {
     display: flex;
     justify-content: center;
   }
+
   .hero__image {
     width: 569px;
     height: 593px;
     margin-top: 22px;
-    margin-left: 143px;
   }
 
   .layout {
-    max-width: 828px;
+    min-width: 828px;
     padding: 0 30px;
   }
 
@@ -609,7 +619,7 @@ body {
   .about__content {
     margin: 0 0 80px 0;
   }
-  
+
   .card {
     margin: 0 20px;
   }
@@ -632,7 +642,7 @@ body {
     padding-bottom: 100px;
   }
 
-  .donation__content{
+  .donation__content {
     margin-left: 0;
   }
 
@@ -645,6 +655,7 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     padding-top: 13px;
+    column-gap: 61px;
   }
 
   .footer__content-section {
@@ -654,20 +665,19 @@ body {
   .footer-section-two {
     margin-right: 0;
     margin-bottom: 67px;
- }
+  }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 767px) {
   .header-hero-wrapper-content {
-    max-width: 340px;
-    padding: 0 20px;
-    margin: -30px;
+    min-width: 340px;
+    padding: 0 40px;
   }
 
   .menu {
     display: none;
   }
-  
+
   .hamburger-menu {
     width: 30px;
     height: 30px;
@@ -680,7 +690,13 @@ body {
   .line {
     width: 100%;
     height: 2px;
-    background-color: #F1CDB3;
+    background-color: #f1cdb3;
+  }
+
+  .hero__content {
+    flex-direction: column;
+    padding-bottom: 30px;
+    align-items: center;
   }
 
   .hero__content-section {
@@ -693,12 +709,151 @@ body {
     max-width: 250px;
     letter-spacing: 1.5px;
   }
-  
+
   .hero__image {
     width: 260px;
     height: 272px;
-    margin-left: 40px;
-    margin-top: 26px;
   }
 
+  .layout {
+    min-width: 340px;
+    padding: 0 20px;
+  }
+
+  .about {
+    padding: 45px 0;
+  }
+
+  .about__content__title {
+    font-size: 25px;
+    text-align: center;
+    max-width: 290px;
+  }
+
+  .about__content__subtitle {
+    text-align: justify;
+  }
+
+  .about__image {
+    width: 260px;
+    height: 353.6px;
+  }
+
+  .pets__title {
+    font-size: 25px;
+    margin-top: 40px;
+  }
+
+  .pets__content__cards {
+    flex-wrap: wrap;
+  }
+
+.arrow-left {
+  order: 3;
 }
+.arrow-right{
+  order: 3;
+}
+
+  .card {
+    order: 1;
+  }
+
+  .card__jennifer {
+    display: none;
+  }
+
+  .help {
+    padding: 42px 0;
+  }
+
+  .help__title {
+    font-size: 25px;
+    max-width: 250px;
+  }
+
+  .help__container {
+    padding: 42px 5px  0 5px;
+   column-gap: 30px;
+    row-gap: 30px;
+  }
+
+  .help-icon {
+    height: 87px;
+    width: 125px;
+  }
+
+  .help-icon-image {
+    width: 50px;
+    height: 50px;
+  }
+
+  .help-icons-text {
+    font-size: 15px;
+  }
+
+  .donation {
+    padding: 42px 0;
+  }
+
+  .donation__content {
+    justify-content: center;
+    align-items: center;
+    row-gap: 3px;
+  }
+
+  .donation__content__title {
+    font-size: 25px;
+    max-width: 229px;
+    text-align: center;
+  }
+
+  .donation__content__button {
+    max-width: 281px;
+  }
+
+  .donation__content__button__text {
+    font-size: 15px;
+  }
+
+  .donation__content__subtitle {
+    letter-spacing: normal;
+  }
+
+  .donation__content__comment {
+    text-align: justify;
+  }
+
+  .donation__image {
+    max-width: 260px;
+    height: 135px;
+    margin-top: 40px;
+  }
+
+  .footer__content {
+    align-items: center;
+    justify-content: center;
+    
+  }
+
+  .footer__content-section {
+    margin-right: 0;
+    padding-top: 28px ;
+  }
+
+  .footer-section-two {
+    padding-top: 42px;
+  }
+
+  .footer__content-section__title {
+    font-size: 25px;
+    max-width: 270px;
+    text-align: center;
+  }
+
+  .footer-section-two {
+    margin-bottom: 40px;
+  }
+}
+
+

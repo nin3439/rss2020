@@ -44,6 +44,11 @@
           </li>
         </ul>
       </nav>
+      <div class="hamburger-menu">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
     </header>
   </div>
   <main>
@@ -55,7 +60,7 @@
             <span>are looking for a house</span>
           </h2>
           <div class="pets__content__cards">
-            <div class="card">
+            <div class="card card-katrine">
               <img src="../../assets/images/pets-katrine.png" alt="Cat Katrine" />
               <h3 class="card__text">Katrine</h3>
               <button type="button" class="card__button">
@@ -64,7 +69,7 @@
                 </span>
               </button>
             </div>
-            <div class="card">
+            <div class="card card-jennifer">
               <img src="../../assets/images/pets-jennifer.png" alt="Dog Jennifer" />
               <h3 class="card__text">Jennifer</h3>
               <button type="button" class="card__button">
@@ -73,7 +78,7 @@
                 </span>
               </button>
             </div>
-            <div class="card">
+            <div class="card card-woddy">
               <img src="../../assets/images/pets-woody.png" alt="Dog Woody" />
               <h3 class="card__text">Woody</h3>
               <button type="button" class="card__button">
@@ -82,7 +87,7 @@
                 </span>
               </button>
             </div>
-            <div class="card">
+            <div class="card card-sophia">
               <img src="../../assets/images/pets-sophia.png" alt="Dog Sophia" />
               <h3 class="card__text">Sophia</h3>
               <button type="button" class="card__button">
@@ -91,7 +96,7 @@
                 </span>
               </button>
             </div>
-            <div class="card">
+            <div class="card card-timmy">
               <img src="../../assets/images/pets-timmy.png" alt="Cat Timmy" />
               <h3 class="card__text">Timmy</h3>
               <button type="button" class="card__button">
@@ -100,7 +105,7 @@
                 </span>
               </button>
             </div>
-            <div class="card">
+            <div class="card card-charly">
               <img src="../../assets/images/pets-charly.png" alt="Dog Charly" />
               <h3 class="card__text">Charly</h3>
               <button type="button" class="card__button">
@@ -109,7 +114,7 @@
                 </span>
               </button>
             </div>
-            <div class="card">
+            <div class="card card-scarlett">
               <img src="../../assets/images/pets-scarlett.png" alt="Dog Scarlett" />
               <h3 class="card__text">Scarlett</h3>
               <button type="button" class="card__button">
@@ -118,7 +123,7 @@
                 </span>
               </button>
             </div>
-            <div class="card">
+            <div class="card card-freddie">
               <img src="../../assets/images/pets-freddie.png" alt="Cat Freddie" />
               <h3 class="card__text">Freddie</h3>
               <button type="button" class="card__button">
@@ -149,40 +154,55 @@
       </div>
     </div>
   </main>
-  <footer class="footer">
-    <div class="footer__content">
-      <div class="footer__content-section">
-          <h2 class="footer__content-section__title">For questions and suggestions</h2>            
-            <a href="mailto:email@shelter.com" class="footer__content-section__link">
-              <img src="../../assets/icons/icon-email.svg" alt="Icon Email" /> 
-              <span class="footer__content-section__subtitle">
-                email@shelter.com
-              </span>
-            </a>            
-            <a href="tel:+13 674 567 75 54" class="footer__content-section__link">
-              <img src="../../assets/icons/phone.svg" alt="Icon Phone" />
-              <span class="footer__content-section__subtitle">
-                +13 674 567 75 54
-              </span>
-            </a>            
-      </div>
-        <div class="footer__content-section footer-section-two">
-          <h2 class="footer__content-section__title">We are waiting for your visit</h2>
-              <a href="https://goo.gl/maps/StQnzYLk4yf9Jrfp7" class="footer__content-section__link footer-section-two-link">
-                <img src="../../assets/icons/icon-marker.svg" alt="Icon Marker" />
-                <span class="footer__content-section__subtitle">
-                  1 Central Street, Boston (entrance from the store)
-                </span>
-              </a> 
-              <a href="https://goo.gl/maps/onyCiZvPLAzgvGCA7" class="footer__content-section__link footer-section-two-link">
-                <img src="../../assets/icons/icon-marker.svg" alt="Icon Marker" />
-                <span class="footer__content-section__subtitle">
-                  18 South Park, London
-                </span>
-              </a>
+  <footer class="width-screen background-footer">
+    <div class="layout">
+      <div class="footer__content">
+        <div class="footer__content-section">
+          <h2 class="footer__content-section__title">
+            For questions and suggestions
+          </h2>
+          <a
+            href="mailto:email@shelter.com"
+            class="footer__content-section__link"
+          >
+            <img src="../../assets/icons/icon-email.svg" alt="Icon Email" />
+            <span class="footer__content-section__subtitle">
+              email@shelter.com
+            </span>
+          </a>
+          <a href="tel:+13 674 567 75 54" class="footer__content-section__link">
+            <img src="../../assets/icons/phone.svg" alt="Icon Phone" />
+            <span class="footer__content-section__subtitle">
+              +13 674 567 75 54
+            </span>
+          </a>
         </div>
-          <img src="../../assets/images/footer-puppy.png" alt="Footer puppy" />
+        <div class="footer__content-section footer-section-two">
+          <h2 class="footer__content-section__title">
+            We are waiting for your visit
+          </h2>
+          <a
+            href="https://goo.gl/maps/StQnzYLk4yf9Jrfp7"
+            class="footer__content-section__link footer-section-two-link"
+          >
+            <img src="../../assets/icons/icon-marker.svg" alt="Icon Marker" />
+            <span class="footer__content-section__subtitle">
+              1 Central Street, Boston (entrance from the store)
+            </span>
+          </a>
+          <a
+            href="https://goo.gl/maps/onyCiZvPLAzgvGCA7"
+            class="footer__content-section__link footer-section-two-link"
+          >
+            <img src="../../assets/icons/icon-marker.svg" alt="Icon Marker" />
+            <span class="footer__content-section__subtitle">
+              18 South Park, London
+            </span>
+          </a>
+        </div>
+        <img src="../../assets/images/footer-puppy.png" alt="Footer puppy" />
+      </div>
     </div>
-</footer>
+  </footer>
 </body>
 </html>
