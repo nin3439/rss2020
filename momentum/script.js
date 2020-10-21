@@ -1,12 +1,16 @@
 // DOM Elements
-const time = document.querySelector('.time'),
-    greeting = document.querySelector('.greeting'),
-    name = document.querySelector('.name'),
-    focus = document.querySelector('.focus'),
-    day = document.querySelector('.day');
-
-// Options
-const showAmPm = true;
+const time = document.querySelector('.time');
+const greeting = document.querySelector('.greeting');
+const name = document.querySelector('.name');
+const focus = document.querySelector('.focus');
+const day = document.querySelector('.day');
+const blockquote = document.querySelector('blockquote');
+const figcaption = document.querySelector('figcaption');
+const btn = document.querySelector('.btn');
+const weatherIcon = document.querySelector('.weather-icon');
+const temperature = document.querySelector('.temperature');
+const weatherDescription = document.querySelector('.weather-description');
+const city = document.querySelector('.city');
 
 // Show Time
 function showTime() {
@@ -122,18 +126,7 @@ name.addEventListener('blur', setName);
 focus.addEventListener('keypress', setFocus);
 focus.addEventListener('blur', setFocus);
 
-// Run
-showTime();
-showDay();
-setBgGreet();
-getName();
-getFocus();
-
-
-const blockquote = document.querySelector('blockquote');
-const figcaption = document.querySelector('figcaption');
-const btn = document.querySelector('.btn');
-
+//Show Quote
 async function getQuote() {
     const url = `https://cors-anywhere.herokuapp.com/https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en`;
     const res = await fetch(url);
@@ -145,10 +138,32 @@ async function getQuote() {
 document.addEventListener('DOMContentLoaded', getQuote);
 btn.addEventListener('click', getQuote);
 
+
+
+
+// Run
+showTime();
+showDay();
+setBgGreet();
+getName();
+getFocus();
+
+
+
+
 async function getWeather() {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=Minsk&lang=en&appid=811e4ee6996e6079253ada8ff16c4991&units=metric`;
     const res = await fetch(url);
     const data = await res.json();
-    console.log(data.weather[0].id, data.weather[0].description, data.main.temp)
+console.log(data.weather[0].id , data.main.temp.toFixed(0), data.weather[0].description)
+    weatherIcon.className = 'weather-icon owf';
+    weatherIcon.classList.add(`owf-${data.weather[0].id}`);
+    temperature.textContent = `${data.main.temp.toFixed(0)}°C`;
+    weatherDescription.textContent = data.weather[0].description;
 }
-getWeather();
+
+
+
+
+document.addEventListener('DOMContentLoaded', getWeather);
+city.addEventListener('keypress', setCity);
