@@ -10,7 +10,10 @@ const btn = document.querySelector('.btn');
 const weatherIcon = document.querySelector('.weather-icon');
 const temperature = document.querySelector('.temperature');
 const weatherDescription = document.querySelector('.weather-description');
+const humidity = document.querySelector('.humidity');
+const windSpeed = document.querySelector('.windSpeed');
 const city = document.querySelector('.city');
+
 
 // Show Time
 function showTime() {
@@ -147,7 +150,7 @@ showDay();
 setBgGreet();
 getName();
 getFocus();
-
+getCity();
 
 
 
@@ -156,14 +159,46 @@ async function getWeather() {
     const res = await fetch(url);
     const data = await res.json();
 console.log(data.weather[0].id , data.main.temp.toFixed(0), data.weather[0].description)
+
     weatherIcon.className = 'weather-icon owf';
     weatherIcon.classList.add(`owf-${data.weather[0].id}`);
     temperature.textContent = `${data.main.temp.toFixed(0)}°C`;
     weatherDescription.textContent = data.weather[0].description;
+    humidity.textContent = `Humidity: ${data.main.humidity}%`;
+    windSpeed.textContent = `Wind speed:  ${data.wind.speed} m/sec`;
 }
 
 
+function getCity() {
+    if (localStorage.getItem('city') === null) {
+        city.textContent = 'Minsk';
+    } else {
+        city.textContent = localStorage.getItem('city');
+    }
+}
+
+function setCity(e) {
+    if (e.type === 'keypress') {
+        // Make sure enter is pressed
+        if (e.which == 13 || e.keyCode == 13) {
+            localStorage.setItem('city', e.target.innerText);
+            getWeather();
+            city.blur();
+        }
+    } else {
+        localStorage.setItem('city', e.target.innerText);
+    }
+}
+
+// function setCity(event) {
+//     console.log(event);
+//     if (event.code === 'Enter') {
+//       getWeather();
+//       city.blur();
+//     }
+//   }
 
 
 document.addEventListener('DOMContentLoaded', getWeather);
 city.addEventListener('keypress', setCity);
+city.addEventListener('blur', setCity);
