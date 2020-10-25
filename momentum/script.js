@@ -70,7 +70,7 @@ function showDay() {
   };
 
   day.innerHTML = `${getWeekDay()}, ${numberDay} ${getMonthName()}`;
-  setInterval(showDay, 60000);
+  setTimeout(showDay, 60000);
 }
 
 //Background
