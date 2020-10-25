@@ -44,10 +44,18 @@
           </li>
         </ul>
       </nav>
-      <div class="hamburger-menu">
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
+      <div class="container">
+        <div cass="container-header">
+          <a href="../main/main.html" class="logo-burger">
+            <div class="logo__title">Cozy House</div>
+            <div class="logo__subtitile">Shelter for pets in Boston</div>
+          </a>
+          <div class="hamburger-menu">
+            <div class="line line-1"></div>
+            <div class="line line-2"></div>
+            <div class="line line-3"></div>
+          </div>
+        </div>
       </div>
     </header>
   </div>
@@ -204,5 +212,25 @@
       </div>
     </div>
   </footer>
+  <nav class="navbar">
+    <ul class="burger-list">
+      <li class="burger-item">
+        <a href="" class="burger-link list__link-active">About the shelter</a>
+      </li>
+      <li class="burger-item">
+        <a href="../pets/pets.html" class="burger-link list__link-inactive"
+          >Our pets</a
+        >
+      </li>
+      <li class="burger-item">
+        <a class="burger-link list__link-disabled">Help the shelter</a>
+      </li>
+      <li class="burger-item">
+        <a class="burger-link list__link-disabled">Contacts</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="overlay"></div>
+  <script src="pets.js"></script>
 </body>
 </html>
