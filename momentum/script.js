@@ -146,6 +146,8 @@ function setBgGreet() {
   document.body.style.backgroundImage = `url(${randomImageArr[hour]})`;
 }
 
+
+
 //slider
 function viewBgImage(data) {
   const src = data;
@@ -237,11 +239,11 @@ focus.addEventListener("blur", setFocus);
 
 //Show Quote
 async function getQuote() {
-  const url = `https://cors-anywhere.herokuapp.com/https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en`;
+  const url = `https://quote-garden.herokuapp.com/api/v2/quotes/random`;
   const res = await fetch(url);
   const data = await res.json();
-  blockquote.textContent = data.quoteText;
-  figcaption.textContent = data.quoteAuthor;
+  blockquote.textContent = data.quote.quoteText;
+  figcaption.textContent = data.quote.quoteAuthor;
 }
 
 document.addEventListener("DOMContentLoaded", getQuote);
@@ -302,4 +304,5 @@ city.addEventListener("blur", setCity);
 // Run
 showTime();
 showDay();
-setBgGreet();
+setTimeout(setBgGreet, 1000);
+

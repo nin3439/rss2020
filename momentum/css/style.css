@@ -87,6 +87,7 @@ h2 {
 
 .quote {
   max-width: 1100px;
+  height: 125px;
   font: 20px Georgia, serif;
   margin: 0 30px;
   background: rgb(238, 238, 238, 0.5);
