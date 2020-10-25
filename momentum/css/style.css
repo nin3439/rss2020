@@ -156,7 +156,6 @@ h2 {
 .error {
   font-size: 14px;
   color: red;
-  margin-top: -10px;
 }
 
 @media (max-width: 850px) {
@@ -204,11 +203,14 @@ h2 {
     top: 0;
     right: 0;
   }
+  
   .weather-button {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    column-gap: 10px;
+    padding-left: 20px;
   }
   
 }
