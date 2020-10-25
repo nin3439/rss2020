@@ -70,7 +70,7 @@ function showDay() {
   };
 
   day.innerHTML = `${getWeekDay()}, ${numberDay} ${getMonthName()}`;
-  setTimeout(showDay, 60000);
+  setInterval(showDay, 60000);
 }
 
 //Background
@@ -128,8 +128,9 @@ addBase(base);
 
 // Set Background and Greeting
 function setBgGreet() {
-  let today = new Date(),
-    hour = today.getHours();
+  let today = new Date();
+  let hour = today.getHours();
+
   if (hour < 6) {
     // Night
     greeting.textContent = "Good Night, ";
@@ -146,7 +147,15 @@ function setBgGreet() {
   document.body.style.backgroundImage = `url(${randomImageArr[hour]})`;
 }
 
+function setIntervalBgGreet() {
+  let today = new Date();
+  let minutes = today.getMinutes();
+  let sec = today.getSeconds();
 
+  if (minutes === 0 && sec === 0) {
+    setBgGreet();
+  }
+}
 
 //slider
 function viewBgImage(data) {
@@ -304,5 +313,6 @@ city.addEventListener("blur", setCity);
 // Run
 showTime();
 showDay();
-setTimeout(setBgGreet, 1000);
+setBgGreet();
+setInterval(setIntervalBgGreet, 1000);
 
