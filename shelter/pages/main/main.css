@@ -44,6 +44,7 @@ body {
 .logo {
   display: flex;
   flex-direction: column;
+  text-decoration: none;
 }
 
 .logo__title {
@@ -78,13 +79,15 @@ body {
 }
 
 .list__link {
-  color: #fafafa;
+  color: #cdcdcd;
   font-family: Arial;
   font-size: 15px;
   line-height: 160%;
+  text-decoration: none;
 }
 
 .list__link-active {
+  color: #fafafa;
   margin-top: 3px;
   border-bottom: 3px solid #f1cdb3;
 }
@@ -93,12 +96,12 @@ body {
   color: #cdcdcd;
 }
 
-.list__link-disabled:hover {
+.list__link-inactive:hover {
   cursor: pointer;
   color: #fafafa;
 }
 
-.list__link-disabled:active {
+.list__link-inactive:active {
   border-bottom: 3px solid #f1cdb3;
   color: #fafafa;
 }
@@ -143,6 +146,7 @@ body {
   height: 52px;
   border: none;
   margin-top: 42px;
+  text-decoration: none;
 }
 
 .hero__content-section__button:hover {
@@ -262,14 +266,6 @@ body {
   background: #f6f6f6;
 }
 
-.arrow-left {
-  margin-right: 8px;
-}
-
-.arrow-right {
-  margin-left: 8px;
-}
-
 .arrow__image {
   margin-top: -1px;
 }
@@ -357,6 +353,7 @@ body {
   border: none;
   margin-top: 60px;
   margin-bottom: 101px;
+  text-decoration: none;
 }
 
 .pets__button:hover {
@@ -485,6 +482,10 @@ body {
 
 .donation__content__button:focus {
   outline: none;
+}
+
+.donation__content__button:hover {
+  background: #fddcc4;
 }
 
 .donation__content__button__text {
@@ -630,16 +631,8 @@ body {
     display: none;
   }
 
-  .arrow-left {
-    margin-right: 0px;
-  }
-
   .help {
     width: 100%;
-  }
-
-  .arrow-right {
-    margin-left: 0px;
   }
 
   .donation {
@@ -690,7 +683,22 @@ body {
     display: flex;
   }
 
-  .navburger {
+.logo {
+  opacity: 0;
+}
+
+.logo-burger {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  position: absolute;
+  top: 30px;
+  right: 100px;
+  z-index: 3;
+}
+
+
+  .navbar {
     width: 320px;
     height: 100%;
     background-color: #292929;
@@ -719,8 +727,8 @@ body {
     cursor: pointer;
     z-index: 3;
   }
-
-  .change .hamburger-menu {
+  .hamburger-menu
+  .change {
     transform: rotate(90deg);
     transition: all 0.8s;
   }
@@ -740,6 +748,7 @@ body {
     list-style: none;
     margin-bottom: 43px;
   }
+
 
   .burger-link {
     text-decoration: none;

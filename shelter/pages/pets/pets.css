@@ -39,6 +39,7 @@ body {
 .logo {
   display: flex;
   flex-direction: column;
+  text-decoration: none;
 }
 
 .logo__title {
@@ -77,6 +78,7 @@ body {
   font-family: Arial;
   font-size: 15px;
   line-height: 160%;
+  text-decoration: none;
 }
 
 .list__link-active {
@@ -84,16 +86,16 @@ body {
   border-bottom: 3px solid #f1cdb3;
 }
 
-.list__link-disabled {
+.list__link-inactive {
   color: #545454;
 }
 
-.list__link-disabled:hover {
+.list__link-inactive:hover {
   cursor: pointer;
   color: #292929;
 }
 
-.list__link-disabled:active {
+.list__link-inactive:active {
   border-bottom: 3px solid #f1cdb3;
   color: #545454;
 }
