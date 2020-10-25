@@ -1,0 +1,214 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-size: cover;
+  color: #fff;
+  text-shadow: 1px 1px 3px black;
+  transition: background-image 1s ease-in-out;
+  height: 100vh;
+}
+
+.btnBG {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  width: 60px;
+  height: 60px;
+  border: 0;
+  background: url("https://www.pngarts.com/files/7/Update-Button-PNG-Image.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  filter: grayscale(1);
+  margin: 10px;
+}
+
+.btnBG:hover {
+  filter: grayscale(.8);
+  transition: 1.5s;
+  cursor: pointer;
+}
+
+.btnBG:active,
+.btnBG:focus {
+  outline: 0;
+}
+
+.btnBG:active{
+  transform: scale(1.02)
+}
+
+.day {
+  font-size: 36px;
+  margin-bottom: 40px;
+}
+
+.time {
+  font-size: 80px;
+  font-family: 'B612 Mono', monospace;
+  margin-bottom: 20px;
+}
+.name {
+  display: inline-block;
+}
+
+h1 {
+  margin-bottom: 30px;
+  font-size: 48px;
+  margin-top: 50px;
+}
+
+h2 {
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+.focus {
+  margin-bottom: 30px;
+}
+
+
+.quote-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.quote {
+  max-width: 1100px;
+  font: 20px Georgia, serif;
+  margin: 0 30px;
+  background: rgb(238, 238, 238, 0.5);
+  padding: 10px;
+  border-radius: 16px;
+}
+
+.quote figcaption,
+.quote blockquote {
+  margin: 10px;
+}
+
+.quote figcaption {
+  text-align: right;
+}
+
+.btn {
+  width: 60px;
+  height: 60px;
+  border: 0;
+  background: url("https://www.pngarts.com/files/7/Update-Button-PNG-Image.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  filter: grayscale(1);
+  margin-bottom: 10px;
+}
+
+.btn:hover {
+  filter: grayscale(0.7);
+  cursor: pointer;
+  transition: 1.5s;
+}
+
+.btn:active,
+.btn:focus {
+  outline: 0;
+}
+
+.btn:active {
+  transform: scale(1.02);
+}
+
+.weather-block {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  background: rgb(238, 238, 238, 0.3);
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  padding: 10px;
+  width: 100px;
+  width: 160px;
+}
+
+.weather-temp {
+  display: flex;
+  justify-content: center;
+  column-gap: 10px;
+  align-items: center;
+}
+
+.weather-icon, .temperature {
+  font-size: 32px;
+}
+
+.error {
+  font-size: 14px;
+  color: red;
+  margin-top: -10px;
+}
+
+@media (max-width: 850px) {
+  .day {
+    font-size: 32px;
+  }
+
+  .time {
+    font-size: 60px;
+  }
+  
+  h1 {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 750px) {
+  body {
+    height: 100%;
+  }
+  .time {
+    font-size: 40px;
+  }
+
+  .day {
+    font-size: 24px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 16px;
+  }
+  
+  .weather-block {
+    position: relative;
+    left: 0;
+    top: 10px;
+  }
+
+  .btnBG {
+    position: relative;
+    top: 0;
+    right: 0;
+  }
+  .weather-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  
+}
