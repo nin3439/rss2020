@@ -27,12 +27,16 @@ body {
 }
 
 .menu {
-  width: 443px;
+  min-width: 443px;
   display: flex;
   margin-top: -15px;
 }
 
 .container {
+  display: none;
+}
+
+.navbar {
   display: none;
 }
 
@@ -100,6 +104,10 @@ body {
   color: #545454;
 }
 
+.list__link-disabled {
+  cursor: default;
+}
+
 .pets {
   width: 100%;
   display: flex;
@@ -131,7 +139,7 @@ body {
   line-height: 130%;
   letter-spacing: 0.06em;
   color: #545454;
-  width: 400px;
+  max-width: 400px;
   padding-bottom: 59px;
   margin-left: 2px;
 }
@@ -187,6 +195,7 @@ body {
 .card__button:hover {
   cursor: pointer;
   background: #fddcc4;
+  transition: 1s;
 }
 
 .card__button:focus {
@@ -207,6 +216,7 @@ body {
 .card:hover {
   cursor: pointer;
   box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
+  transition: 1s;
 }
 
 .pets__buttons {
@@ -229,6 +239,7 @@ body {
 .arrows__inactive:hover {
   cursor: pointer;
   background: #fddcc4;
+  transition: 1s;
 }
 .arrows:focus {
   outline: none;
@@ -279,7 +290,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   padding-top: 40px;
-  column-gap: 119px;
+  column-gap: 138px;
 }
 
 .footer__content-section {
@@ -296,15 +307,15 @@ body {
   line-height: 130%;
   letter-spacing: 0.06em;
   color: #ffffff;
-  width: 300px;
+  max-width: 300px;
 }
 .footer__content-section__subtitle {
   margin-left: 20px;
-  width: 260px;
+  max-width: 260px;
 }
 
 .footer-section-two {
-  margin-right: 40px;
+  margin-right: 21px;
 }
 
 .footer__content-section__link {
@@ -324,7 +335,6 @@ body {
 .footer-section-two-link {
   margin-top: 32px;
 }
-
 
 @media (max-width: 1199px) {
   .header {
@@ -346,7 +356,9 @@ body {
     margin-top: 10px;
     margin-bottom: 76px;
   }
+
   .footer__content {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -355,7 +367,7 @@ body {
   }
 
   .footer__content-section {
-    margin-right: 20px;
+    margin-right: -22px;
   }
 
   .footer-section-two {
@@ -366,8 +378,12 @@ body {
 
 @media (max-width: 767px) {
   .header {
-    min-width: 340px;
+    min-width: 320px;
     padding: 30px 10px 20px 10px;
+  }
+
+  .layout {
+    padding: 0 10px;
   }
 
   .menu {
@@ -388,34 +404,36 @@ body {
     text-decoration: none;
     position: absolute;
     top: 30px;
-    right: 100px;
+    right: 116px;
     z-index: 3;
   }
 
   .navbar {
     width: 320px;
     height: 100%;
-    background-color: #292929;
+    background-color: #fff;
     position: fixed;
     top: 0;
     right: -320px;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: right 0.8s;
+    transition: right 1s;
+    padding-top: 150px;
   }
 
   .toggle-navbar {
     right: 0;
     z-index: 2;
+   
   }
 
   .hamburger-menu {
     width: 30px;
     height: 30px;
     position: absolute;
-    top: 50px;
-    right: 50px;
+    top: 46px;
+    right: 53px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -428,12 +446,12 @@ body {
     height: 100vh;
     position: absolute;
     top: 0;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(41, 41, 41, 0.4);
     display: none;
   }
 
   .show-overlay {
-    display: block;
+    display: block; 
   }
 
   .disable-body {
@@ -442,13 +460,22 @@ body {
 
   .rotate-hamburger-icon {
     transform: rotate(90deg);
-    transition: all 0.8s;
+    transition: all 1s;
+  }
+
+  .rotate-hamburger-icon-back {
+    transform: rotate(0deg);
+    transition: all 1s;
+  }
+
+  .header-unset {
+    position: unset;
   }
 
   .line {
     width: 100%;
     height: 2px;
-    background-color: #f1cdb3;
+    background-color: #000000;
   }
 
   .burger-list {
@@ -462,7 +489,7 @@ body {
 
   .burger-link {
     text-decoration: none;
-    color: #fafafa;
+    color: #545454;;
     font-family: Arial;
     font-size: 32px;
     line-height: 160%;
@@ -474,14 +501,12 @@ body {
     align-items: center;
   }
 
-
   .pets__content {
-    padding: 0 25px;
     margin-top: 42px;
   }
 
   .pets__content__title {
-font-size: 25px;
+    font-size: 25px;
   }
 
   .pets__content__title {
@@ -495,7 +520,7 @@ font-size: 25px;
   }
 
   .pets__buttons {
-    margin-left: 0; 
+    margin-left: 10px;
     margin-bottom: 43px;
   }
 
@@ -506,16 +531,16 @@ font-size: 25px;
   .footer__content {
     align-items: center;
     justify-content: center;
-    
+    padding-top: 0;
   }
 
   .footer__content-section {
     margin-right: 0;
-    padding-top: 28px ;
+    padding-top: 28px;
   }
 
   .footer-section-two {
-    padding-top: 42px;
+    margin-bottom: 37px;
   }
 
   .footer__content-section__title {
@@ -524,8 +549,13 @@ font-size: 25px;
     text-align: center;
   }
 
-  .footer-section-two {
-    margin-bottom: 40px;
+  .footer__content-section__subtitle {
+    margin-top: 8px;
+    margin-bottom: 7px;
+  }
+
+  .footer__image {
+    width: 260px;
+    height: 269px;
   }
 }
-
