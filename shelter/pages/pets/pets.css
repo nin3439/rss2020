@@ -280,7 +280,7 @@ body {
 }
 
 .background-footer {
-  background: url(../../assets/images/noise_transparent@2X.png),
+  background: url("../../assets/images/noise.png"),
     radial-gradient(110.67% 538.64% at 5.73% 50%, #513d2f 0%, #1a1a1c 100%),
     #211f20;
 }
