@@ -85,8 +85,24 @@
     background: rgba(0, 0, 0, 0.3);
   }
 
- @media (max-width: 875px) {
+ @media (max-width: 910px) {
     .keyboard__key {
       font-size: 14px;
+      margin: 3px;
+    }
+
+    .keyboard__key--wide {
+      width: 8%;
+    }
+
+    .keyboard__key--extra-wide {
+      width: 28%;
+      max-width: 500px;
+    }
+
+    .keyboard__key--activatable::after {
+      top: 35px;
+      right: 7px;
     }
   } 
+

@@ -15,6 +15,7 @@ const Keyboard = {
     capsLock: false,
     shift: false,
     english: true,
+    cursorPos: 0,
   },
 
   keyLayoutEn: [
@@ -267,18 +268,26 @@ const Keyboard = {
       });
     });
 
-    
+    this.keepFocusOnInput();
+  },
+
+  keepFocusOnInput() {
+    const input = document.querySelector(".use-keyboard-input");
+    input.addEventListener("blur", (event) => {
+      this.properties.cursorPos = input.selectionStart;
+      input.focus();
+    });
   },
 
   createKeys() {
     const fragment = document.createDocumentFragment();
     let mainInsertLineBreak = this.insertLineBreakEn;
-    
+
     // Creates HTML for an icon
     const createIconHTML = (icon_name) => {
       return `<i class="material-icons">${icon_name}</i>`;
     };
-   
+
     this.mainKeyLayout.forEach((key) => {
       const keyElement = document.createElement("button");
       const insertLineBreak = mainInsertLineBreak.indexOf(key) !== -1;
@@ -344,7 +353,7 @@ const Keyboard = {
           keyElement.innerHTML = "en";
 
           keyElement.addEventListener("click", () => {
-          this.toggleLanguage();
+            this.toggleLanguage();
           });
 
           break;
@@ -389,16 +398,17 @@ const Keyboard = {
         default:
           keyElement.textContent = key.toLowerCase();
 
-          keyElement.addEventListener("click", () => {
-            console.log(key)
+          keyElement.addEventListener("click", (event) => {
+            const keyContent = event.target.innerText;
+
             if (this.properties.capsLock && !this.properties.shift) {
-              this.properties.value += key.toUpperCase();
+              this.properties.value += keyContent.toUpperCase();
             } else if (!this.properties.capsLock && this.properties.shift) {
-              this.properties.value += key.toUpperCase();
+              this.properties.value += keyContent.toUpperCase();
             } else if (this.properties.capsLock && this.properties.shift) {
-              this.properties.value += key.toLowerCase();
+              this.properties.value += keyContent.toLowerCase();
             } else {
-              this.properties.value += key.toLowerCase();
+              this.properties.value += keyContent.toLowerCase();
             }
 
             this.triggerEvent("oninput");
@@ -439,13 +449,12 @@ const Keyboard = {
   },
 
   changeKeyLayout() {
-    console.log(this.mainKeyLayout)
     if (this.properties.shift && this.properties.english) {
       this.mainKeyLayout = this.keyShiftEn;
     } else if (this.properties.shift && !this.properties.english) {
       this.mainKeyLayout = this.keyShiftRu;
-    }  else  if (!this.properties.shift && !this.properties.english) {
-      this.mainKeyLayout = this.keyLayoutRu; 
+    } else if (!this.properties.shift && !this.properties.english) {
+      this.mainKeyLayout = this.keyLayoutRu;
     } else {
       this.mainKeyLayout = this.keyLayoutEn;
     }
@@ -465,12 +474,11 @@ const Keyboard = {
           key.textContent = this.mainKeyLayout[i].toUpperCase();
         }
       }
-      if(this.mainKeyLayout[i] === "language" && this.properties.english){
+      if (this.mainKeyLayout[i] === "language" && this.properties.english) {
         key.textContent = "en";
-      } else if(this.mainKeyLayout[i] === "language") key.textContent = "ru";
+      } else if (this.mainKeyLayout[i] === "language") key.textContent = "ru";
       i++;
     }
-    this.createKeys();
   },
 
   open(initialValue, oninput, onclose) {
@@ -491,3 +499,19 @@ const Keyboard = {
 window.addEventListener("DOMContentLoaded", function () {
   Keyboard.init();
 });
+
+// let selectedKey;
+// let keyboardKeys = Keyboard.elements.keysContainer.querySelectorAll(".keyboard__key");
+// keyboardKeys.addEventListener("click", function(e) {
+//   let target = e.target;
+//   if (target.ClassName != 'keyboard__key') return;
+//   hilightKey(target);
+// });
+
+// function hilightKey(key) {
+//  if (selectedKey) {
+//   selectedKey.classList.remove('keyboard__key--highlight');
+//  }
+//  selectedKey = key;
+//  selectedTd.classList.add('keyboard__key--highlight');
+// };
