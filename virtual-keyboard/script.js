@@ -18,6 +18,7 @@ const Keyboard = {
     shift: false,
     english: true,
     cursorPos: 0,
+    sound: true,
   },
 
   keyLayoutEn: [
@@ -70,6 +71,7 @@ const Keyboard = {
     ",",
     ".",
     "/",
+    "sound",
     "language",
     "space",
     "left",
@@ -126,6 +128,7 @@ const Keyboard = {
     "<",
     ">",
     "?",
+    "sound",
     "language",
     "space",
     "left",
@@ -182,6 +185,7 @@ const Keyboard = {
     "б",
     "ю",
     ".",
+    "sound",
     "language",
     "space",
     "left",
@@ -237,6 +241,7 @@ const Keyboard = {
     "Б",
     "Ю",
     ",",
+    "sound",
     "language",
     "space",
     "left",
@@ -298,7 +303,6 @@ const Keyboard = {
 
     document.addEventListener('keyup', (event) => {
       this.elements.keys.forEach((key) => {
-        console.log(event.key)
         if (key.textContent === event.key) {
           key.classList.remove('keyboard__key--highlighted');
         };
@@ -345,6 +349,11 @@ const Keyboard = {
               0,
               this.properties.value.length - 1
             );
+            if (this.properties.english) {
+              this.playSound("back-en");
+            } else {
+              this.playSound("back-ru");
+            };
             this.triggerEvent("oninput");
           });
 
@@ -361,6 +370,11 @@ const Keyboard = {
 
           keyElement.addEventListener("click", () => {
             this.toggleCapsLock();
+            if (this.properties.english) {
+              this.playSound("caps-en");
+            } else {
+              this.playSound("caps-ru");
+            };
             keyElement.classList.toggle(
               "keyboard__key--active",
               this.properties.capsLock
@@ -379,6 +393,11 @@ const Keyboard = {
 
           keyElement.addEventListener("click", () => {
             this.toggleShift();
+            if (this.properties.english) {
+              this.playSound("shift-en");
+            } else {
+              this.playSound("shift-ru");
+            };
             keyElement.classList.toggle(
               "keyboard__key--active",
               this.properties.shift
@@ -394,6 +413,11 @@ const Keyboard = {
 
           keyElement.addEventListener("click", () => {
             this.toggleLanguage();
+            if (this.properties.english) {
+              this.playSound("lang-en");
+            } else {
+              this.playSound("lang-ru");
+            };
           });
 
           break;
@@ -405,6 +429,11 @@ const Keyboard = {
 
           keyElement.addEventListener("click", () => {
             this.properties.value += " ";
+            if (this.properties.english) {
+              this.playSound("space-en");
+            } else {
+              this.playSound("space-ru");
+            };
             this.triggerEvent("oninput");
           });
 
@@ -419,6 +448,11 @@ const Keyboard = {
           keyElement.innerHTML = createIconHTML("check_circle");
 
           keyElement.addEventListener("click", () => {
+            if (this.properties.english) {
+              this.playSound("done-en");
+            } else {
+              this.playSound("done-ru");
+            };
             this.close();
             this.triggerEvent("onclose");
           });
@@ -432,6 +466,23 @@ const Keyboard = {
 
           keyElement.addEventListener("click", () => {
             this.properties.value = this.properties.value.substr(0, this.properties.cursorPos) + "\n" + this.properties.value.substr(this.properties.cursorPos, this.properties.value.length);
+            if (this.properties.english) {
+              this.playSound("enter-en");
+            } else {
+              this.playSound("enter-ru");
+            }
+            this.triggerEvent("oninput");
+          });
+
+          break;
+
+        case "sound":
+          keyElement.classList.add("special");
+          keyElement.setAttribute('id', 'sound');
+          keyElement.innerHTML = createIconHTML("volume_up");
+
+          keyElement.addEventListener("click", () => {
+            this.toggleSound();
             this.triggerEvent("oninput");
           });
 
@@ -444,6 +495,11 @@ const Keyboard = {
 
           keyElement.addEventListener("click", () => {
             this.setCursorPos(keyboardInput, -1);
+            if (this.properties.english) {
+              this.playSound("left-en");
+            } else {
+              this.playSound("left-ru");
+            };
             this.triggerEvent("oninput");
           });
 
@@ -456,6 +512,11 @@ const Keyboard = {
 
           keyElement.addEventListener("click", () => {
             this.setCursorPos(keyboardInput, 1);
+            if (this.properties.english) {
+              this.playSound("right-en");
+            } else {
+              this.playSound("right-ru");
+            };
             this.triggerEvent("oninput");
           });
 
@@ -476,7 +537,11 @@ const Keyboard = {
             } else {
               this.properties.value = this.properties.value.substr(0, this.properties.cursorPos) + keyContent.toLowerCase() + this.properties.value.substr(this.properties.cursorPos, this.properties.value.length);
             }
-
+            if (this.properties.english) {
+              this.playSound("en");
+            } else {
+              this.playSound("ru");
+            }
             this.properties.cursorPos += 1;
             this.triggerEvent("oninput");
           });
@@ -503,6 +568,26 @@ const Keyboard = {
   setCursorPos(keyboardInput, addedPosition) {
     keyboardInput.selectionEnd = keyboardInput.selectionStart = keyboardInput.selectionStart + addedPosition;
     this.properties.cursorPos = keyboardInput.selectionStart + addedPosition;
+  },
+
+  toggleSound() {
+    this.properties.sound = !this.properties.sound;
+
+    let sound = document.querySelector('#sound > i');
+    if (this.properties.sound) {
+      sound.textContent = 'volume_up';
+    } else {
+      sound.textContent = 'volume_off';
+    }
+  },
+
+  playSound(name) {
+    if (this.properties.sound === false) return;
+
+    const audio = new Audio;
+
+    audio.src = `assets/${name}.wav`;
+    audio.play();
   },
 
   toggleCapsLock() {
