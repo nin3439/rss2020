@@ -86,6 +86,11 @@
     background: rgba(0, 0, 0, 0.3);
   }
 
+  .keyboard__key--highlighted {
+    background: #0099CC;
+    box-shadow: 0px 0px 10px #0099cc;
+  }
+
  @media (max-width: 910px) {
     .keyboard__key {
       font-size: 14px;
