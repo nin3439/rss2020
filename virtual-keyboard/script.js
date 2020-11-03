@@ -345,16 +345,18 @@ const Keyboard = {
 
 
           keyElement.addEventListener("click", () => {
-            this.properties.value = this.properties.value.substring(
+            this.properties.value = this.properties.value.substr(
               0,
-              this.properties.value.length - 1
-            );
+              this.properties.cursorPos - 1) + this.properties.value.substr(this.properties.cursorPos, this.properties.value.length);
+
             if (this.properties.english) {
               this.playSound("back-en");
             } else {
               this.playSound("back-ru");
             };
             this.triggerEvent("oninput");
+            keyboardInput.selectionStart = this.properties.cursorPos - 1;
+            keyboardInput.selectionEnd = this.properties.cursorPos - 1;
           });
 
           break;
@@ -428,13 +430,16 @@ const Keyboard = {
           keyElement.innerHTML = createIconHTML("space_bar");
 
           keyElement.addEventListener("click", () => {
-            this.properties.value += " ";
+            this.properties.value = this.properties.value.substr(0, this.properties.cursorPos) + " " + this.properties.value.substr(this.properties.cursorPos, this.properties.value.length);
             if (this.properties.english) {
               this.playSound("space-en");
             } else {
               this.playSound("space-ru");
             };
             this.triggerEvent("oninput");
+
+            keyboardInput.selectionStart = this.properties.cursorPos + 1;
+            keyboardInput.selectionEnd = this.properties.cursorPos + 1;
           });
 
           break;
@@ -472,6 +477,8 @@ const Keyboard = {
               this.playSound("enter-ru");
             }
             this.triggerEvent("oninput");
+            keyboardInput.selectionStart = this.properties.cursorPos + 1;
+            keyboardInput.selectionEnd = this.properties.cursorPos + 1;
           });
 
           break;
@@ -542,8 +549,11 @@ const Keyboard = {
             } else {
               this.playSound("ru");
             }
-            this.properties.cursorPos += 1;
+
             this.triggerEvent("oninput");
+
+            keyboardInput.selectionStart = this.properties.cursorPos + 1;
+            keyboardInput.selectionEnd = this.properties.cursorPos + 1;
           });
 
           break;
