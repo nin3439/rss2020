@@ -10,9 +10,8 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-image: linear-gradient(#3da5d9,#2364aa);
+  background-image: linear-gradient(#3da5d9, #2364aa);
 }
-
 
 .playing-field {
   width: 400px;
@@ -33,7 +32,7 @@ body {
   border: 2px solid gray;
   border-radius: 10px;
   position: relative;
-  margin: 10px 30px;
+  margin: 10px 30px 0 30px;
 }
 
 .cell {
@@ -46,15 +45,14 @@ body {
   justify-content: center;
   align-items: center;
   position: absolute;
-  font-size: 50px;
-  transition: all 0.5s;
+  font-size: 40px;
+  transition: all 0.7s;
   cursor: default;
-  background-color: #ABD8D4;
-  color: #2364AA;
+  background-color: #abd8d4;
+  color: #2364aa;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
   outline: none;
 }
-
 
 header {
   width: 85%;
@@ -63,31 +61,32 @@ header {
   justify-content: space-between;
 }
 
-header button {
+button {
   border: none;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: bold;
   border-radius: 5px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
   padding: 5px;
-  width: 80px;
+  width: 100px;
   background-color: #fec601;
-  color: #2364AA;
+  color: #2364aa;
   outline: none;
   cursor: pointer;
   transition: all 0.5s;
 }
 
-header button:hover {
-  background-color: #2364AA;
+button:hover {
+  background-color: #2364aa;
   color: #fec601;
 }
 
-
 footer {
-  width: 100%;
+  width: 85%;
+  height: 39px;
   display: flex;
   justify-content: space-around;
+  margin: 10px;
 }
 
 footer span {
@@ -96,19 +95,29 @@ footer span {
   font-size: 20px;
   color: #fec601;
   font-weight: bold;
-  margin: auto 0; 
-  margin-bottom: 10px;
+  margin: auto 0;
 }
 
 h2 {
+  position: absolute;
+  bottom: 77px;
+  font-size: 18px;
+  color: rgb(255, 243, 243);
+  padding: 0 20px;
+  text-align: center;
+  text-shadow: 1px 1px 3px black;
+}
+
+h3 {
   font-size: 16px;
   color: #fec601;
-  padding: 20px;
+  padding: 0 20px;
   text-align: center;
+  margin-bottom: 30px;
 }
 
 @media (max-width: 500px) {
-  .playing-field  {
+  .playing-field {
     width: 300px;
     height: 300px;
   }
@@ -117,8 +126,12 @@ h2 {
     font-size: 30px;
   }
 
-  header button {
-    width: 60px;
+  button {
+    width: 80px;
+    font-size: 14px;
+  }
+
+  footer span {
+    font-size: 17px;
   }
 }
-

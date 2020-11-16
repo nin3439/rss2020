@@ -5,19 +5,27 @@ const field = document.createElement("div");
 field.className = "field";
 const header = document.createElement("header");
 const footer = document.createElement("footer");
+const instruction = document.createElement("h3");
+instruction.innerText =
+  "Empty cell should be at position top: 0 and left: 0 in the end of the game";
 
+document.body.append(instruction);
 document.body.append(playingField);
 playingField.appendChild(header);
 playingField.appendChild(field);
 playingField.appendChild(footer);
 
 const buttonPlayElement = document.createElement("button");
-buttonPlayElement.innerText = "Play";
-header.appendChild(buttonPlayElement);
+footer.appendChild(buttonPlayElement);
 
 const buttonSoundElement = document.createElement("button");
-buttonSoundElement.innerHTML = "<img src='assets/icons/volume_up.svg' width='25px' height='25px'>";
+buttonSoundElement.innerHTML =
+  "<img src='assets/icons/volume_up.svg' width='25px' height='25px'>";
 header.appendChild(buttonSoundElement);
+
+const buttonSaveElement = document.createElement("button");
+buttonSaveElement.innerText = "Save Game";
+header.appendChild(buttonSaveElement);
 
 const moveElement = document.createElement("span");
 moveElement.innerText = "Moves: 0";
@@ -30,7 +38,7 @@ footer.appendChild(timeElement);
 const messageElement = document.createElement("h2");
 document.body.append(messageElement);
 
-let cellSize = 25;
+const cellSize = 25;
 
 let cells = [];
 
@@ -45,22 +53,13 @@ let timeСounter = 0;
 let sound = true;
 let startedDate;
 
-
-function newGame() {
-  startedDate = new Date().getTime();
-  field.innerHTML = "";
-  empty = {
-    value: 0,
-    top: 0,
-    left: 0,
-  };
-  cells = [];
-  cells.push(empty);
+function createNewGame() {
+  resetGame();
+  buttonPlayElement.textContent = "Reset";
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].sort(
     () => Math.random() - 0.5
   );
 
-  //check isSolvable
   let sum = 0;
 
   for (let i = 0; i < 15; i++) {
@@ -73,14 +72,16 @@ function newGame() {
     }
   }
 
-    if (sum % 2 !== 0) {
-      console.log('повтор');
-      return newGame();
-  } 
+  if (sum % 2 !== 0) {
+    return createNewGame();
+  }
+
+  cells.push(empty);
 
   for (let i = 1; i <= 15; i++) {
     const cell = document.createElement("div");
     const value = numbers[i - 1];
+
     cell.className = "cell";
     cell.innerHTML = value;
 
@@ -100,17 +101,12 @@ function newGame() {
     field.append(cell);
 
     cell.addEventListener("click", () => {
-      moveCell(i);
-      
+      if (buttonPlayElement.textContent !== "New Game") {
+        moveCell(i);
+      }
     });
   }
-
-
 }
-
-
-
-
 
 function moveCell(index) {
   const cell = cells[index];
@@ -133,22 +129,35 @@ function moveCell(index) {
   cell.top = emptyTop;
 
   moveElement.textContent = `Moves: ${(move += 1)}`;
-  playSound();
+  playSound("click");
 
   const isFinished = cells.every((cell) => {
     return cell.value === cell.top * 4 + cell.left;
   });
 
   if (isFinished) {
-    messageElement.textContent = `Good job! You solved the puzzle in ${min}min ${sec}sec and ${move} moves.`;
+    messageElement.textContent = `Good job! You solved the puzzle in ${min} min ${sec} sec and ${move} moves.`;
+    playSound("winner");
     move = 0;
     moveElement.textContent = `Moves: 0`;
     clearInterval(timer);
     time = 0;
     timeElement.textContent = `Time: 00:00`;
+    buttonPlayElement.textContent = "New Game";
   } else {
     messageElement.textContent = "";
   }
+}
+
+function resetGame() {
+  startedDate = new Date().getTime();
+  field.innerHTML = "";
+  empty = {
+    value: 0,
+    top: 0,
+    left: 0,
+  };
+  cells = [];
 }
 
 function addZero(n) {
@@ -161,43 +170,72 @@ let sec;
 function countTime() {
   const currentDate = new Date().getTime();
   const diffSec = Math.round((currentDate - startedDate) / 1000);
-  
+
   min = Math.trunc(diffSec / 60);
   sec = diffSec % 60;
-  
-  return timeElement.textContent = `Time: ${addZero(min)}:${addZero(sec)}`;
+
+  return (timeElement.textContent = `Time: ${addZero(min)}:${addZero(sec)}`);
 }
 
 let timer = setInterval(countTime, 1000);
 
+function playSound(name) {
+  if (sound === false) return;
+
+  const audio = new Audio();
+
+  audio.src = `assets/sounds/${name}.mp3`;
+  audio.play();
+}
+
+function saveGame() {
+  localStorage.setItem("field", field.innerHTML);
+  localStorage.setItem("moves", move);
+  localStorage.setItem("min", min);
+  localStorage.setItem("sec", sec);
+}
+
+function getSaveGame() {
+  localStorage.getItem("field", field.innerHTML);
+  let saveMoves = localStorage.getItem("moves", move);
+  moveElement.textContent = `Move: ${saveMoves}`;
+  min = localStorage.getItem("min", min);
+  sec = localStorage.getItem("sec", sec);
+  timeElement.textContent = `Time: ${addZero(min)}:${addZero(sec)}`;
+}
+
+buttonSaveElement.addEventListener("click", () => {
+  saveGame();
+});
 
 buttonPlayElement.addEventListener("click", () => {
   move = 0;
   moveElement.textContent = `Moves: 0`;
   time = 0;
   timeElement.textContent = `Time: 00:00`;
-  return newGame();
+  if (buttonPlayElement.textContent === "New Game") {
+    messageElement.textContent = "";
+    timer = setInterval(countTime, 1000);
+  }
+  return createNewGame();
 });
 
-buttonSoundElement.addEventListener('click', () => {
+buttonSoundElement.addEventListener("click", () => {
   if (sound) {
     sound = false;
-    buttonSoundElement.innerHTML = "<img src='assets/icons/volume_off.svg' width='25px' height='25px'>";
-  } else  {
+    buttonSoundElement.innerHTML =
+      "<img src='assets/icons/volume_off.svg' width='25px' height='25px'>";
+  } else {
     sound = true;
-    buttonSoundElement.innerHTML = "<img src='assets/icons/volume_up.svg' width='25px' height='25px'>";
-  };
+    buttonSoundElement.innerHTML =
+      "<img src='assets/icons/volume_up.svg' width='25px' height='25px'>";
+  }
 });
 
-function playSound() {
-  if (sound === false) return;
-
-  const audio = new Audio;
-
-  audio.src = `assets/sounds/click.mp3`;
-  audio.play();
-}
-
 window.addEventListener("DOMContentLoaded", function () {
-  newGame();
+  // if (localStorage.length === 0) {
+  createNewGame();
+  // } else {
+  //   getSaveGame();
+  // }
 });
