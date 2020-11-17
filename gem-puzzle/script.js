@@ -51,40 +51,18 @@ let empty = {
 let move = 0;
 let timeСounter = 0;
 let sound = true;
-let startedDate;
+let startedDate = new Date().getTime();
 
 function createNewGame() {
   resetGame();
   buttonPlayElement.textContent = "Reset";
-  const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].sort(
-    () => Math.random() - 0.5
-  );
 
-  let sum = 0;
-
-  for (let i = 0; i < 15; i++) {
-    let j = i + 1;
-    while (j < 15) {
-      if (numbers[j] < numbers[i]) {
-        sum += 1;
-      }
-      j++;
-    }
-  }
-
-  if (sum % 2 !== 0) {
-    return createNewGame();
-  }
+  const numbers = getRandomNumbers();
 
   cells.push(empty);
 
   for (let i = 1; i <= 15; i++) {
-    const cell = document.createElement("div");
     const value = numbers[i - 1];
-
-    cell.className = "cell";
-    cell.innerHTML = value;
-
     const left = i % 4;
     const top = (i - left) / 4;
 
@@ -92,39 +70,75 @@ function createNewGame() {
       value: value,
       left: left,
       top: top,
-      element: cell,
-    });
-
-    cell.style.left = `${left * cellSize}%`;
-    cell.style.top = `${top * cellSize}%`;
-
-    field.append(cell);
-
-    cell.addEventListener("click", () => {
-      if (buttonPlayElement.textContent !== "New Game") {
-        moveCell(i);
-      }
     });
   }
+  renderCells(cells);
+}
+
+function renderCells(cells) {
+  cells.forEach((cell, i) => {
+    if (cell.value !== 0) {
+      const cellElement = document.createElement("div");
+      cellElement.className = "cell";
+      cellElement.innerHTML = cell.value;
+      cellElement.id = cell.value;
+      cellElement.style.left = `${cell.left * cellSize}%`;
+      cellElement.style.top = `${cell.top * cellSize}%`;
+      field.append(cellElement);
+      cellElement.addEventListener("click", () => {
+        if (buttonPlayElement.textContent !== "New Game") {
+          moveCell(i);
+        }
+      });
+    }
+  });
+}
+
+function getRandomNumbers() {
+  let sum = 0;
+  let numbers = [];
+
+  while (sum % 2 !== 0 || sum === 0) {
+    numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].sort(
+      () => Math.random() - 0.5
+    );
+
+    for (let i = 0; i < 15; i++) {
+      let j = i + 1;
+      while (j < 15) {
+        if (numbers[j] < numbers[i]) {
+          sum += 1;
+        }
+        j++;
+      }
+    }
+  }
+  return numbers;
 }
 
 function moveCell(index) {
   const cell = cells[index];
 
-  const leftDiff = Math.abs(empty.left - cell.left);
-  const topDiff = Math.abs(empty.top - cell.top);
+  const emptyCell = cells.find((cell) => cell.value === 0);
+
+  const leftDiff = Math.abs(emptyCell.left - cell.left);
+  const topDiff = Math.abs(emptyCell.top - cell.top);
 
   if (leftDiff + topDiff > 1) {
     return;
   }
 
-  cell.element.style.left = `${empty.left * cellSize}%`;
-  cell.element.style.top = `${empty.top * cellSize}%`;
+  document.getElementById(cell.value).style.left = `${
+    emptyCell.left * cellSize
+  }%`;
+  document.getElementById(cell.value).style.top = `${
+    emptyCell.top * cellSize
+  }%`;
 
-  const emptyLeft = empty.left;
-  const emptyTop = empty.top;
-  empty.left = cell.left;
-  empty.top = cell.top;
+  const emptyLeft = emptyCell.left;
+  const emptyTop = emptyCell.top;
+  emptyCell.left = cell.left;
+  emptyCell.top = cell.top;
   cell.left = emptyLeft;
   cell.top = emptyTop;
 
@@ -141,7 +155,6 @@ function moveCell(index) {
     move = 0;
     moveElement.textContent = `Moves: 0`;
     clearInterval(timer);
-    time = 0;
     timeElement.textContent = `Time: 00:00`;
     buttonPlayElement.textContent = "New Game";
   } else {
@@ -164,16 +177,14 @@ function addZero(n) {
   return (parseInt(n, 10) < 10 ? "0" : "") + n;
 }
 
-let min;
-let sec;
+let min = 0;
+let sec = 0;
 
 function countTime() {
   const currentDate = new Date().getTime();
   const diffSec = Math.round((currentDate - startedDate) / 1000);
-
   min = Math.trunc(diffSec / 60);
   sec = diffSec % 60;
-
   return (timeElement.textContent = `Time: ${addZero(min)}:${addZero(sec)}`);
 }
 
@@ -189,19 +200,23 @@ function playSound(name) {
 }
 
 function saveGame() {
-  localStorage.setItem("field", field.innerHTML);
+  localStorage.setItem("cells", JSON.stringify(cells));
   localStorage.setItem("moves", move);
   localStorage.setItem("min", min);
   localStorage.setItem("sec", sec);
 }
 
-function getSaveGame() {
-  localStorage.getItem("field", field.innerHTML);
-  let saveMoves = localStorage.getItem("moves", move);
-  moveElement.textContent = `Move: ${saveMoves}`;
-  min = localStorage.getItem("min", min);
-  sec = localStorage.getItem("sec", sec);
+function loadSavedGame() {
+  buttonPlayElement.textContent = "Reset";
+  field.innerHTML = "";
+  cells = JSON.parse(localStorage.getItem("cells"));
+  move = parseInt(localStorage.getItem("moves"));
+  min = parseInt(localStorage.getItem("min"));
+  sec = parseInt(localStorage.getItem("sec"));
+  startedDate = new Date().getTime() - (min * 60 + sec) * 1000;
+  moveElement.textContent = `Moves: ${move}`;
   timeElement.textContent = `Time: ${addZero(min)}:${addZero(sec)}`;
+  renderCells(cells);
 }
 
 buttonSaveElement.addEventListener("click", () => {
@@ -211,7 +226,6 @@ buttonSaveElement.addEventListener("click", () => {
 buttonPlayElement.addEventListener("click", () => {
   move = 0;
   moveElement.textContent = `Moves: 0`;
-  time = 0;
   timeElement.textContent = `Time: 00:00`;
   if (buttonPlayElement.textContent === "New Game") {
     messageElement.textContent = "";
@@ -233,9 +247,9 @@ buttonSoundElement.addEventListener("click", () => {
 });
 
 window.addEventListener("DOMContentLoaded", function () {
-  // if (localStorage.length === 0) {
-  createNewGame();
-  // } else {
-  //   getSaveGame();
-  // }
+  if (!localStorage.getItem("cells")) {
+    createNewGame();
+  } else {
+    loadSavedGame();
+  }
 });
