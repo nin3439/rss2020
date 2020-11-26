@@ -1,3 +1,27 @@
+const menuButton= document.querySelector('.menu-button');
+const navbar = document.querySelector('.menu');
+const body = document.querySelector('body');
+
+let isMenuOpen = false; 
+
+menuButton.addEventListener('click', () => {
+    navbar.classList.toggle('toggle');
+    if (!isMenuOpen) {
+        
+        isMenuOpen = true;
+    } else {
+       
+        isMenuOpen = false;
+    }
+})
+
+// body.addEventListener('click', () => {
+//     if (isMenuOpen) {
+//         navbar.classList.toggle('toggle');
+//         isMenuOpen = false;
+//     } 
+// })
+
 const routes = {
     '/' : categories,
     '/actionA' : categories[0],

@@ -1,62 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="categories.js"></script>
-    
-    <title>English for kids</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="categories.js"></script>
+
+  <title>English for kids</title>
 </head>
+
 <body>
-    <div class="app-wrapper">
-   <header>
-          <div class="menu">
-              <div class="line"></div>
-              <div class="line"></div>
-              <div class="line"></div>
-          </div>
-          <h1>English for kids</h1>
-          <input class="switch" type="checkbox"></input>
-      </header>
-      <main>
-          <div id="root"></div>
-          <div class="container"> </div>
-      </main>
-      <footer></footer>
+  <div class="app-wrapper">
+    <header>
+      <nav class="menu">
+        <div class="menu-button">
+          <div class="line line-1"></div>
+          <div class="line line-2"></div>
+          <div class="line line-3"></div>
+        </div>
+        <ul class="menu-list">
+          <li class="menu-item">
+            <a class="menu-link list__link-active" href="#" onclick="onNavigate('/'); return false;">Main Page</a>
+          </li>
+          <li class="menu-item">
+            <a class="menu-link list__link-inactive" href="#" onclick="onNavigate('/actionA'); return false;">Action
+              (set A)</a>
+          </li>
+          <li class="menu-item">
+            <a class="menu-link list__link-inactive" href="#" onclick="onNavigate('/actionB'); return false;">Action
+              (set B)</a>
+          </li>
+          <li class="menu-item">
+            <a class="menu-link list__link-inactive" href="#" onclick="onNavigate('/actionC'); return false;">Action
+              (set C)</a>
+          </li>
+          <li class="menu-item">
+            <a class="menu-link list__link-inactive" href="#"
+              onclick="onNavigate('/adjective'); return false;">Adjective</a>
+          </li>
+          <li class="menu-item">
+            <a class="menu-link list__link-inactive" href="#" onclick="onNavigate('/animalsA'); return false;">Animal
+              (set A)</a>
+          </li>
+          <li class="menu-item">
+            <a class="menu-link list__link-inactive" href="#" onclick="onNavigate('/animalsB'); return false;">Animal
+              (set B)</a>
+          </li>
+          <li class="menu-item">
+            <a class="menu-link list__link-inactive" href="#"
+              onclick="onNavigate('/clothes'); return false;">Clothes</a>
+          </li>
+          <li class="menu-item">
+            <a class="menu-link list__link-inactive" href="#"
+              onclick="onNavigate('/emotions'); return false;">Emotion</a>
+          </li>
+        </ul>
+      </nav>
+      <h1>English for kids</h1>
+      <input class="switch" type="checkbox"></input>
+    </header>
+    <main>
+      <div id="root"></div>
+      <div class="container"> </div>
+    </main>
+    <footer></footer>
   </div>
-  <nav class="navbar">
-      <ul class="menu-list">
-        <li class="menu-item">
-          <a class="menu-link list__link-active" href="#" onclick="onNavigate('/'); return false;">Main Page</a>
-        </li>
-        <li class="menu-item">
-          <a class="menu-link list__link-inactive" href="#" onclick="onNavigate('/actionA'); return false;">Action (set A)</a>
-        </li>
-        <li class="menu-item">
-          <a class="menu-link list__link-inactive" href="#" onclick="onNavigate('/actionB'); return false;">Action (set B)</a>
-        </li>
-        <li class="menu-item">
-          <a class="menu-link list__link-inactive" href="#" onclick="onNavigate('/actionC'); return false;">Action (set C)</a>
-        </li>
-        <li class="menu-item">
-          <a class="menu-link list__link-inactive" href="#" onclick="onNavigate('/adjective'); return false;">Adjective</a>
-        </li>
-        <li class="menu-item">
-          <a class="menu-link list__link-inactive" href="#" onclick="onNavigate('/animalsA'); return false;">Animal (set A)</a>
-        </li>
-        <li class="menu-item">
-          <a class="menu-link list__link-inactive" href="#" onclick="onNavigate('/animalsB'); return false;">Animal (set B)</a>
-        </li>
-        <li class="menu-item">
-          <a class="menu-link list__link-inactive" href="#" onclick="onNavigate('/clothes'); return false;">Clothes</a>
-        </li>
-        <li class="menu-item">
-          <a class="menu-link list__link-inactive" href="#"onclick="onNavigate('/emotions'); return false;">Emotion</a>
-        </li>
-      </ul>
-    </nav>
-  </div>  
-    <script src="app.js"></script>
+
+  </div>
+  <script src="app.js"></script>
 </body>
+
 </html>
