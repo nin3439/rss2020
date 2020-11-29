@@ -1,6 +1,5 @@
 const playingField = document.createElement("div");
 playingField.className = "playing-field";
-
 const field = document.createElement("div");
 field.className = "field";
 const header = document.createElement("header");
@@ -75,25 +74,6 @@ function createNewGame() {
   renderCells(cells);
 }
 
-function renderCells(cells) {
-  cells.forEach((cell, i) => {
-    if (cell.value !== 0) {
-      const cellElement = document.createElement("div");
-      cellElement.className = "cell";
-      cellElement.innerHTML = cell.value;
-      cellElement.id = cell.value;
-      cellElement.style.left = `${cell.left * cellSize}%`;
-      cellElement.style.top = `${cell.top * cellSize}%`;
-      field.append(cellElement);
-      cellElement.addEventListener("click", () => {
-        if (buttonPlayElement.textContent !== "New Game") {
-          moveCell(i);
-        }
-      });
-    }
-  });
-}
-
 function getRandomNumbers() {
   let sum = 0;
   let numbers = [];
@@ -114,6 +94,25 @@ function getRandomNumbers() {
     }
   }
   return numbers;
+}
+
+function renderCells(cells) {
+  cells.forEach((cell, i) => {
+    if (cell.value !== 0) {
+      const cellElement = document.createElement("div");
+      cellElement.className = "cell";
+      cellElement.innerHTML = cell.value;
+      cellElement.id = cell.value;
+      cellElement.style.left = `${cell.left * cellSize}%`;
+      cellElement.style.top = `${cell.top * cellSize}%`;
+      field.append(cellElement);
+      cellElement.addEventListener("click", () => {
+        if (buttonPlayElement.textContent !== "New Game") {
+          moveCell(i);
+        }
+      });
+    }
+  });
 }
 
 function moveCell(index) {
