@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <script src="categories.js"></script>
+
 
   <title>English for kids</title>
 </head>
@@ -60,16 +60,28 @@
         </ul>
       </nav>
       <h1>English for kids</h1>
-      <input class="switch" type="checkbox"></input>
+ 
+      <div class="check">
+        <span class="play">play</span>
+        <span class="train">Train</span>
+        <input id="check" type="checkbox">
+        <label for="check"></label>
+      </div>
+
     </header>
     <main>
-      <div id="root"></div>
-      <div class="container"> </div>
+    
+      <div id="root">
+        <div id="container"> 
+        </div>
+      </div>
+      
     </main>
     <footer></footer>
   </div>
 
   </div>
+  <script src="categories.js"></script>
   <script src="app.js"></script>
 </body>
 

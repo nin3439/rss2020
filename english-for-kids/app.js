@@ -1,37 +1,30 @@
 const menuButton= document.querySelector('.menu-button');
 const navbar = document.querySelector('.menu');
-const body = document.querySelector('body');
+const switchButton = document.querySelector('.check');
+const trainPart = document.querySelector('.train');
+const playPart = document.querySelector('span:first-child');
+console.log(playPart)
 
-let isMenuOpen = false; 
 
 menuButton.addEventListener('click', () => {
     navbar.classList.toggle('toggle');
-    if (!isMenuOpen) {
-        
-        isMenuOpen = true;
-    } else {
-       
-        isMenuOpen = false;
-    }
 })
 
-// body.addEventListener('click', () => {
-//     if (isMenuOpen) {
-//         navbar.classList.toggle('toggle');
-//         isMenuOpen = false;
-//     } 
-// })
+switchButton.addEventListener('cleck', () => {
+    trainPart.classList.toggle('none');
+    playPart.classList.add('none');
+})
 
 const routes = {
-    '/' : categories,
-    '/actionA' : categories[0],
-    '/actionB' : categories[1],
-    '/actionC' : categories[2],
-    '/adjective' : categories[3],
-    '/animalsA' : categories[4],
-    '/animalsB' : categories[5],
-    '/clothes' : categories[6],
-    '/emotions' : categories[7]
+    '/' : container.innerHTML,
+    '/actionA' : newArr[0],
+    '/actionB' : newArr[1],
+    '/actionC' : newArr[2],
+    '/adjective' : newArr[3],
+    '/animalsA' : newArr[4],
+    '/animalsB' : newArr[5],
+    '/clothes' : newArr[6],
+    '/emotions' : newArr[7]
 };
 
 const rootDiv = document.getElementById('root');
@@ -49,4 +42,7 @@ const onNavigate = (pathname) => {
 window.onpopstate = () => {
     rootDiv.innerHTML = routes[window.location.pathname]
 };
+
+
+
 

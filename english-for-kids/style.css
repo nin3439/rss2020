@@ -127,3 +127,132 @@ header {
   display: flex;
   justify-content: center;
 }
+
+/* style switchButton take on page https://codepen.io/daviddarnes/pen/LdGYVG */
+.check {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+	background: linear-gradient(90deg, #f19af3, #f099b5);
+	line-height: 0;
+	perspective: 400px;
+}
+
+.check input[type="checkbox"],
+.check label,
+.check label::before,
+.check label::after,
+.check {
+	appearance: none;
+	display: inline-block;
+	border-radius: 50px;
+	border: 0;
+	transition: .35s ease-in-out;
+	box-sizing: border-box;
+	cursor: pointer;
+}
+
+.check label {
+	width: 110px;
+	height: 50px;
+	background: #d7d7d7;
+	overflow: hidden;
+}
+
+.check input[type="checkbox"] {
+	position: absolute;
+	z-index: 1;
+	width: 40px;
+	height: 40px;
+	top: 5px;
+	left: 5px;
+	background: linear-gradient(45deg, #dedede, #ffffff);
+	box-shadow: 0 6px 7px rgba(0,0,0,0.3);
+	outline: none;
+}
+
+.check input[type="checkbox"]:checked {
+	left: 65px;
+}
+
+.check input[type="checkbox"]:checked + label {
+	background: transparent;
+}
+
+.check label::before,
+.check label::after {
+	content: "· ·";
+	position: absolute;
+	overflow: hidden;
+	left: 7px;
+	top: 25px;
+	height: 50px;
+	letter-spacing: -2px;
+	color: #9b9b9b;
+	font-family: "Times New Roman", serif;
+	z-index: 2;
+	font-size: 30px;
+	border-radius: 0;
+	transform-origin: 0 0 -25px;
+	backface-visibility: hidden;
+}
+
+.check label::after {
+	content: "●";
+	top: 33px;
+	left: 15px;
+	height: 5px;
+	width: 17px;
+	font-size: 10px;
+	transform-origin: 0 0 -20px;
+}
+
+.check input[type="checkbox"]:checked + label::before,
+.check input[type="checkbox"]:checked + label::after {
+	left:78px;
+	top: 20px;
+	line-height: 5px;
+	transform: rotateY(360deg);
+}
+
+.check input[type="checkbox"]:checked + label::after {
+	height: 8px;
+	top: 27px;
+	left: 80px;
+	font-size: 30px;
+	line-height: 0;
+}
+
+span {
+  font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 19px;
+    line-height: 17px;
+    color: white;
+    position: absolute;
+    z-index: 10;
+    text-transform: uppercase;
+    top: 15px;
+    left: 10px;
+}
+
+.train{
+  left: 49px;
+}
+
+.none {
+  display: none;
+}
+
+#container {
+  display : flex;
+  flex-direction: row;
+  flex-wrap : wrap;
+}
+
+.categories {
+  width: 100px;
+  height: 100px;
+  margin: 20px;
+}
