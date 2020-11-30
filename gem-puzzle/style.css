@@ -32,7 +32,7 @@ body {
   border: 2px solid gray;
   border-radius: 10px;
   position: relative;
-  margin: 10px 30px 0 30px;
+  margin: 10px 30px 0;
 }
 
 .cell {
@@ -102,7 +102,7 @@ h2 {
   position: absolute;
   bottom: 77px;
   font-size: 18px;
-  color: rgb(255, 243, 243);
+  color: #fff3f3;
   padding: 0 20px;
   text-align: center;
   text-shadow: 1px 1px 3px black;
