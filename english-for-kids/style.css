@@ -5,7 +5,8 @@
 
 body {
     width: 100%;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Noto Sans JP', sans-serif;
+    background-image: url('./assets/images/bg1.jpg');
 }
 
 .app-wrapper {
@@ -26,7 +27,7 @@ header {
   width: 35px;
   height: 30px;
   position: fixed;
-  top: 50px;
+  top: 35px;
   left: 50px;
   display: flex; 
   flex-direction: column;
@@ -54,12 +55,12 @@ header {
   align-items: center;
   transition: left 0.8s;
   border-radius: 0 20% 20% 0;
-  z-index: 2;
+  z-index: 7;
 }
 
 .toggle {
   left: 0px;
-  z-index: 2;
+  z-index: 7;
 }
 
 .toggle .line-1 {
@@ -80,16 +81,24 @@ header {
 
 .menu-item{
     list-style: none;
-    margin: 25px;
+    margin: 15px;
+}
+
+.menu-image {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
 }
 
 .menu-link {
     text-decoration: none;
     font-size: 20px;
-    color: #f7e864;
+    color: #ffec44;
     letter-spacing: 1px;
     position: relative;
-    padding: 3px 0;
+    padding: 7px 0;
+    display: flex;
+    align-items: center;
 }
 
 .menu-link::before,
@@ -123,6 +132,21 @@ header {
     color: red;
   }
 
+  .overlay {
+    background-color: rgba(61, 61, 61, 0.2);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    transition: 0.5s ease;
+  }
+  
+  .disable-body {
+    overflow: hidden;
+  }
+
 #root {
   display: flex;
   justify-content: center;
@@ -131,9 +155,9 @@ header {
 /* style switchButton take on page https://codepen.io/daviddarnes/pen/LdGYVG */
 .check {
   position: absolute;
-  top: 50px;
+  top: 28px;
   right: 50px;
-	background: linear-gradient(90deg, #f19af3, #f099b5);
+  background: #ffec44;
 	line-height: 0;
 	perspective: 400px;
 }
@@ -155,13 +179,14 @@ header {
 .check label {
 	width: 110px;
 	height: 50px;
-	background: #d7d7d7;
-	overflow: hidden;
+	background: #61489c;
+  overflow: hidden;
+  box-shadow: inset 0px -1px 1px rgba(255, 255, 255, 0.28), inset 0px 1px 2px rgba(0, 0, 0, 0.25);
 }
 
 .check input[type="checkbox"] {
 	position: absolute;
-	z-index: 1;
+	z-index: 2;
 	width: 40px;
 	height: 40px;
 	top: 5px;
@@ -190,7 +215,7 @@ header {
 	letter-spacing: -2px;
 	color: #9b9b9b;
 	font-family: "Times New Roman", serif;
-	z-index: 2;
+	z-index: 3;
 	font-size: 30px;
 	border-radius: 0;
 	transform-origin: 0 0 -25px;
@@ -224,17 +249,18 @@ header {
 }
 
 span {
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: bold;
-    font-size: 19px;
+    font-size: 17px;
     line-height: 17px;
     color: white;
     position: absolute;
-    z-index: 10;
+    z-index: 1;
     text-transform: uppercase;
     top: 15px;
     left: 10px;
+    text-shadow: 1px 1px 2px black;
 }
 
 .train{
@@ -245,14 +271,32 @@ span {
   display: none;
 }
 
-#container {
+.content-wrapper {
   display : flex;
   flex-direction: row;
   flex-wrap : wrap;
+  justify-content: center;
 }
 
 .categories {
-  width: 100px;
-  height: 100px;
+  display: flex;
+  flex-direction: column;
   margin: 20px;
+  width: 252px;
+  height: 240px;
+  border: 1px solid black;
+  align-items: center;
+  cursor: pointer;
 }
+
+.categories__image {
+  width: 252px;
+  height: 187px;
+}
+
+.categories__title {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 10px;
+}
+
