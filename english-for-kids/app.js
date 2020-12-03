@@ -1,85 +1,87 @@
-
-const menuButton = document.querySelector('.menu-button');
-const overlay = document.querySelector('.overlay');
-const navbar = document.querySelector('.menu');
-const switchButton = document.querySelector('#check');
-const trainPart = document.querySelector('.train');
-const playPart = document.querySelector('span:first-child');
-const rootDiv = document.getElementById('root');
-const contentWrapper = document.createElement('div');
+const menuButton = document.querySelector(".menu-button");
+const overlay = document.querySelector(".overlay");
+const navbar = document.querySelector(".menu");
+const switchButton = document.querySelector("#check");
+const trainPart = document.querySelector(".train");
+const playPart = document.querySelector("span:first-child");
+const rootDiv = document.getElementById("root");
+const contentWrapper = document.createElement("div");
+const circleTrain = document.querySelector('.circle-train');
 
 let isTrain = true;
-menuButton.addEventListener('click', () => {
-  navbar.classList.toggle('toggle');
-  overlay.classList.toggle('none');
+menuButton.addEventListener("click", () => {
+  navbar.classList.toggle("toggle");
+  overlay.classList.toggle("none");
   document.body.classList.toggle("disable-body");
 });
 
-overlay.addEventListener('click', () => {
-  navbar.classList.toggle('toggle');
-  document.body.classList.toggle("disable-body")
-  overlay.classList.toggle('none');
-})
+overlay.addEventListener("click", () => {
+  navbar.classList.toggle("toggle");
+  document.body.classList.toggle("disable-body");
+  overlay.classList.toggle("none");
+});
 
-switchButton.addEventListener('click', () => {
+switchButton.addEventListener("click", () => {
   if (isTrain) {
-    trainPart.classList.add('none');
-    playPart.classList.remove('none');
+    trainPart.classList.add("none");
+    playPart.classList.remove("none");
+
     isTrain = false;
   } else {
-    playPart.classList.add('none');
-    trainPart.classList.remove('none');
+    playPart.classList.add("none");
+    trainPart.classList.remove("none");
+   
     isTrain = true;
   }
 });
 
 const categories = [
   {
-    id: 'actionA',
-    title: 'Action (set A)',
-    image: 'assets/images/cards/actionA.jpg',
+    id: "actionA",
+    title: "Action (set A)",
+    image: "assets/images/cards/actionA.jpg",
   },
 
   {
-    id: 'actionB',
-    title: 'Action (set B)',
-    image: 'assets/images/cards/swim.jpg',
+    id: "actionB",
+    title: "Action (set B)",
+    image: "assets/images/cards/swim.jpg",
   },
 
   {
-    id: 'actionC',
-    title: 'Action (set C)',
-    image: 'assets/images/cards/draw.jpg',
+    id: "actionC",
+    title: "Action (set C)",
+    image: "assets/images/cards/draw.jpg",
   },
 
   {
-    id: 'adjective',
-    title: 'Adjective',
-    image: 'assets/images/cards/cry.jpg',
+    id: "adjective",
+    title: "Adjective",
+    image: "assets/images/cards/cry.jpg",
   },
 
   {
-    id: 'animalA',
-    title: 'Animal (set A)',
-    image: 'assets/images/cards/lion.jpg',
+    id: "animalA",
+    title: "Animal (set A)",
+    image: "assets/images/cards/pig.jpg",
   },
 
   {
-    id: 'animalB',
-    title: 'Animal (set B)',
-    image: 'assets/images/cards/pig.jpg',
+    id: "animalB",
+    title: "Animal (set B)",
+    image: "assets/images/cards/lion.jpg",
   },
 
   {
-    id: 'clothes',
-    title: 'Clothes',
-    image: 'assets/images/cards/pants.jpg',
+    id: "clothes",
+    title: "Clothes",
+    image: "assets/images/cards/pants.jpg",
   },
 
   {
-    id: 'emotions',
-    title: 'Emotions',
-    image: 'assets/images/cards/happy.jpg',
+    id: "emotions",
+    title: "Emotions",
+    image: "assets/images/cards/happy.jpg",
   },
 ];
 
@@ -426,66 +428,81 @@ const cards = [
   },
 ];
 
+
+
 function renderContent(param) {
-  
-  contentWrapper.innerHTML = '';
-  contentWrapper.classList.add('content-wrapper');
-  rootDiv.append(contentWrapper);
-  
-  categories.map((item) => {
-    const categoryElement = document.createElement('div');
-  
-    categoryElement.classList.add('categories');
-    categoryElement.id = item.id;
-    categoryElement.onclick = function() {
-          console.log('click')
-      onNavigate(`/${item.id}`)
-    }
-     categoryElement.addEventListener('click', () => {
-      console.log('click')
-      onNavigate(`/${item.id}`)
+  if (param) {
+    contentWrapper.innerHTML = "";
+    contentWrapper.classList.add("content-wrapper");
+
+    const cardsOfCategory = cards.filter(card => card.id === param);
+    const cardsElements = getCardsElements(cardsOfCategory);
+
+    cardsElements.forEach(item => {
+      contentWrapper.append(item);
     })
-    categoryElement.innerHTML = `
-      <img src="${item.image}" alt ="${item.title}" class="categories__image">
-      <h3 class="categories__title">${item.title}</h3>
-      `;
-    contentWrapper.append(categoryElement);
- 
+  } else {
+    contentWrapper.innerHTML = "";
+    contentWrapper.classList.add("content-wrapper");
+    
+    categories.map((item) => {
+      const categoryElement = document.createElement("div");
+      categoryElement.classList.add("categories");
+      categoryElement.id = item.id;
+      categoryElement.onclick = function () {
+        onNavigate(`/${item.id}`); 
+      };
+      categoryElement.innerHTML = `
+        <img src="${item.image}" alt ="${item.title}" class="categories__image">
+        <div class="categoryFooter"> 
+          <div class="circle-train"></div>
+          <h3 class="categories__title">${item.title}</h3>
+        </div>
+        `;
+      contentWrapper.append(categoryElement);
+    });
+  }
+  return contentWrapper;
+
+};
+
+
+function getCardsElements(cardsOfCategory) {
+  const cardsElements = cardsOfCategory.map(card => {
+    let cardElement = document.createElement('div');
+    cardElement.classList.add('card');
+    cardElement.innerHTML = `
+      <img src="${card.image}" alt ="${card.word}" class="card__image">
+      <h3 class="card__word">${card.word}</h3>
+        <div class="circle-train"></div>
+        <img src="assets/images/cards/rotate.svg" alt="Icon Rotate" class="image-rotate">
+    `;
+    return cardElement;
   });
-}
-
-
-// let cardsOfCategory = cards.filter(card => card.id === categories.id);
-// renderCards() {
-//   let cardElement = document.createElement('div');
-//   cardElement.classList.add('card');
-//   cardElement.
-// }
-
-
+  return cardsElements;
+};
 
 
 const routes = {
-  '/': () => renderContent(),
-  '/actionA': () => renderContent("actionA"),
-  '/actionB': () => renderContent("actionB"),
-  '/actionC': () => renderContent("actionC"),
-  '/adjective': () => renderContent("adjective"),
-  '/animalsA': () => renderContent("animalsA"),
-  '/animalsB': () => renderContent("animalsB"),
-  '/clothes': () => renderContent("clothes"),
-  '/emotions': () => renderContent("emotions"),
+  "/": () => renderContent(),
+  "/actionA": () => renderContent("actionA"),
+  "/actionB": () => renderContent("actionB"),
+  "/actionC": () => renderContent("actionC"),
+  "/adjective": () => renderContent("adjective"),
+  "/animalA": () => renderContent("animalA"),
+  "/animalB": () => renderContent("animalB"),
+  "/clothes": () => renderContent("clothes"),
+  "/emotions": () => renderContent("emotions"),
 };
 
-rootDiv.append((routes[window.location.pathname])());
+rootDiv.append(routes[window.location.pathname]());
 
 const onNavigate = (pathname) => {
+
   window.history.pushState({}, pathname, window.location.origin + pathname);
-  rootDiv.append((routes[pathname])());
+  rootDiv.append(routes[pathname]());
 };
 
 window.onpopstate = () => {
-  rootDiv.append((routes[window.location.pathname])());
+  rootDiv.append(routes[window.location.pathname]());
 };
-
-
