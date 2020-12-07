@@ -6,7 +6,7 @@
 body {
     width: 100%;
     font-family: 'Noto Sans JP', sans-serif;
-    background-image: url('./assets/images/bg.jpg');
+    background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 100%);
 }
 
 .app-wrapper {
@@ -20,6 +20,10 @@ header {
   justify-content: center;
   align-items: center;
   height: 100px;
+}
+
+.title {
+  color: rgba(0, 0, 0, 0.803);
 }
 
 .menu-button {
@@ -146,13 +150,17 @@ header {
     overflow: hidden;
   }
 
+  .active-link {
+    color: red;
+  }
+
 
 /* style switchButton take on page https://codepen.io/daviddarnes/pen/LdGYVG */
 .check {
   position: absolute;
   top: 28px;
   right: 50px;
-  background: #ffec44;
+  background: #ebba16;
 	line-height: 0;
 	perspective: 400px;
 }
@@ -271,6 +279,7 @@ span {
   flex-direction: row;
   flex-wrap : wrap;
   justify-content: center;
+  padding-bottom: 60px;
 }
 
 .categories {
@@ -330,12 +339,30 @@ span {
   display: flex;
   flex-direction: column;
   align-items: center;
+  transform: rotateY(180deg)
 }
 
 .card__image {
   width: 252px;
   height: 187px;
   border-radius: 16px 16px 0 0;
+}
+
+.card-play {
+  width: 252px;
+  height: 187px;
+  margin: 17px;
+  border-radius: 16px;
+}
+
+.card-play:hover {
+  box-shadow: 0px 2px 30px 7px rgba(13, 13, 13, 0.5);
+}
+
+.card__image-play {
+  width: 252px;
+  height: 187px;
+  border-radius: 16px;
 }
 
 .card__word {
@@ -364,7 +391,7 @@ span {
   border-radius: 50%;
   box-shadow: 0px 0px 0px 3px rgba(13, 13, 13, 0.2);
   margin-top: 10px;
-  background-color:#ffec44;
+  background-color:#ebba16;
 }
 
 .image-rotate {
@@ -377,15 +404,113 @@ span {
 }
 
 .rotate-true {
-  transform: rotateY(-360deg);
-  transition: transform 1s;
+  transform: rotateY(180deg);
+  transition: transform 0.7s;
 }
 
 .rotate-false {
   transform: rotateY(0);
-  transition: transform 1s;
+  transition: transform 0.7s;
 }
 
 .hidden {
   display: none;
+}
+
+.footer {
+  width: 100%;
+  height: 70px;
+  background-color: rgba(247, 247, 247, 0.637);
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 6;
+}
+
+.footer-text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: black;
+  font-size: 20px;
+}
+
+.rss-image {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  margin-top: 7px;
+}
+
+.footer-link {
+  text-decoration: none;
+  color: black;
+}
+
+.play-button {
+  height: 70px;
+  width: 70px;
+  background-image: url('/assets/images/icons/play-button.svg');
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 50%;
+}
+
+.repeat-button {
+  background-image: url('/assets/images/icons/repeat-btn.svg');
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.repeat-button:active {
+  transform: rotate(-45deg);
+}
+
+.play-button:focus {
+  outline: none;
+}
+
+.star {
+  width: 40px;
+  height: 40px;
+}
+
+.disable-card {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.content-wrapper-center {
+  width: 100%;
+  height: 100%;
+  padding-bottom: 0;
+}
+
+.finish-game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+}
+
+.finish-image {
+ width: 700px;
+}
+
+.finish-text {
+  color: rgba(255, 0, 35, 0.94);
+ font-size: 25px;
+ text-shadow: 1px 1px 2px black;
+ margin-bottom: 30px;
+}
+
+@media (max-width: 600px) {
+  .title {
+    display: none;
+  }
 }
