@@ -6,30 +6,32 @@ const trainPart = document.querySelector('.train');
 const playPart = document.querySelector('span:first-child');
 const rootDiv = document.getElementById('root');
 const contentWrapper = document.createElement('div');
-const menuList = document.querySelector('.menu-list')
+const menuList = document.querySelector('.menu-list');
+const mainPage = document.querySelector('.active-link');
 
 let isTrain = true;
 let isGameStart = false;
-let selectedLink;
+let selectedLink = mainPage;
 let randomCards = [];
 let currentCardIndex = 0;
 let errors = 0;
 
-// menuList.addEventListener('click', (event) => {
-//   const target = event.target;
-//   if (target.tagName != 'A') return;
-//   highlight(target);
+menuList.addEventListener('click', (event) => {
+  const { target } = event;
+  if (target.tagName !== 'A') return;
+  highlight(target);
+  navbar.classList.toggle('toggle');
+  overlay.classList.toggle('none');
+  document.body.classList.toggle('disable-body');
+});
 
-// })
-
-// function highlight(link) {
-//   if (selectedLink) {
-//     selectedLink.classList.remove('active-link');
-//   } else {
-//     selectedLink = link;
-//     selectedLink.classList.add('active-link')
-//   }
-// };
+function highlight(link) {
+  if (selectedLink) {
+    selectedLink.classList.remove('active-link');
+    selectedLink = link;
+    selectedLink.classList.add('active-link');
+  }
+}
 
 switchButton.addEventListener('click', () => {
   if (isTrain) {
@@ -570,28 +572,32 @@ function renderContent(param) {
   footerTextElement.setAttribute('class', 'footer-text');
   footerTextElement.innerHTML = `<a class="footer-link" href="https://rs.school/js/" class><img src="/assets/images/icons/rs_school_js.svg" alt="RSS Icon" class="rss-image"></a> 
   <div class="created-person"> 2020 Created by <a class="footer-link" href="https://github.com/nin3439">nin3439</a></div>
-  `
+  `;
   footerElement.append(footerTextElement);
-
   if (param) {
     const cardsOfCategory = cards.filter((card) => card.id === param);
     const cardsElements = getCardsElements(cardsOfCategory);
     cardsElements.forEach((item) => contentWrapper.append(item));
-
     if (!isTrain) {
       footerElement.innerHTML = '';
+      footerElement.classList.add('footer-play');
       const playButtonElement = document.createElement('button');
       playButtonElement.setAttribute('class', 'play-button');
       footerElement.append(playButtonElement);
-     
-        playButtonElement.addEventListener('click', () => {
-          if (!isGameStart) {
+      const starErrorElement = document.createElement('div');
+      starErrorElement.setAttribute('class', 'error-stars');
+      footerElement.append(starErrorElement);
+      const starWinElement = document.createElement('div');
+      starWinElement.setAttribute('class', 'win-stars');
+      footerElement.append(starWinElement);
+      playButtonElement.addEventListener('click', () => {
+        if (!isGameStart) {
           playButtonElement.classList.add('repeat-button');
           startGame(param);
         } else {
           playSound(randomCards[currentCardIndex].word);
         }
-        });
+      });
     }
   } else {
     const categoriesElements = getCategoriesElement();
@@ -600,13 +606,12 @@ function renderContent(param) {
   return contentWrapper;
 }
 
-
 function getCategoriesElement() {
   const categoriesElemets = categories.map((item) => {
     const categoryElement = document.createElement('div');
     categoryElement.classList.add('categories');
     categoryElement.id = item.id;
-    categoryElement.onclick = function () {
+    categoryElement.onclick = function onNav() {
       onNavigate(`/${item.id}`);
     };
     const categoryElementImage = document.createElement('img');
@@ -626,6 +631,61 @@ function getCategoriesElement() {
   return categoriesElemets;
 }
 
+function playGame(currentTarget) {
+  if (currentCardIndex < randomCards.length - 1) {
+    if (currentTarget.id !== randomCards[currentCardIndex].word) {
+      playSound('error');
+      const starErrorElement = document.querySelector('.error-stars');
+      const starError = document.createElement('img');
+      starError.setAttribute('src', '/assets/images/icons/star.svg');
+      starError.setAttribute('alt', 'Star');
+      starError.setAttribute('class', 'star');
+      starErrorElement.append(starError);
+      errors += 1;
+    } else {
+      playSound('correct');
+      const starWinElement = document.querySelector('.win-stars');
+      const starWin = document.createElement('img');
+      starWin.setAttribute('src', '/assets/images/icons/star-win.svg');
+      starWin.setAttribute('alt', 'Star Win');
+      starWin.setAttribute('class', 'star');
+      starWinElement.append(starWin);
+      currentTarget.classList.add('disable-card');
+      setTimeout(() => {
+        playSound(randomCards[currentCardIndex + 1].word);
+        currentCardIndex += 1;
+      }, 1000);
+    }
+  } else {
+    contentWrapper.innerHTML = '';
+    const finishedGame = document.createElement('div');
+    finishedGame.classList.add('finish-game');
+    contentWrapper.append(finishedGame);
+    const finishedGameText = document.createElement('h3');
+    finishedGameText.setAttribute('class', 'finish-text');
+    if (errors > 0) {
+      finishedGameText.textContent = `Oops! You finished game with ${errors === 1 ? '1 error' : `${errors} errors`}! Try it again!`;
+      playSound('failure');
+    } else {
+      finishedGameText.textContent = 'Congratulations! You finished game without errors!';
+      playSound('success');
+    }
+    finishedGame.append(finishedGameText);
+    const finishedGameImage = document.createElement('img');
+    finishedGameImage.setAttribute('src', `/assets/images/cards/${errors > 0 ? 'failure' : 'winner'}.jpg`);
+    finishedGameImage.setAttribute('alt', `${errors > 0 ? 'failure' : 'winner'}`);
+    finishedGameImage.setAttribute('class', 'finish-image');
+    finishedGame.append(finishedGameImage);
+    setTimeout(() => {
+      isGameStart = false;
+      errors = 0;
+      currentCardIndex = 0;
+      randomCards = [];
+      renderContent();
+    }, 3000);
+  }
+}
+
 function getCardsElements(cardsOfCategory) {
   const cardsElements = cardsOfCategory.map((card) => {
     if (!isTrain) {
@@ -636,63 +696,10 @@ function getCardsElements(cardsOfCategory) {
       cardElementImage.setAttribute('src', `${card.image}`);
       cardElementImage.setAttribute('alt', `${card.word}`);
       cardElementImage.setAttribute('class', 'card__image-play');
-      cardPlayElement.addEventListener('click', () => {
+      cardPlayElement.addEventListener('click', (event) => {
         if (isGameStart) {
-          if (currentCardIndex < randomCards.length - 1) {
-            if (cardPlayElement.id !== randomCards[currentCardIndex].word) {
-              playSound('error');
-              const footer = document.querySelector('footer');
-              const starError = document.createElement('img');
-              starError.setAttribute('src', '/assets/images/icons/star.svg');
-              starError.setAttribute('alt', 'Star');
-              starError.setAttribute('class', 'star');
-              footer.append(starError);
-              errors += 1;
-              console.log(errors)
-            } else {
-              playSound('correct');
-              const footer = document.querySelector('footer');
-              const starWin = document.createElement('img');
-              starWin.setAttribute('src', '/assets/images/icons/star-win.svg');
-              starWin.setAttribute('alt', 'Star Win');
-              starWin.setAttribute('class', 'star');
-              footer.append(starWin);
-              cardPlayElement.classList.add('disable-card');
-              setTimeout(() => {
-                playSound(randomCards[currentCardIndex+1].word);
-                currentCardIndex++;
-              }, 1000); 
-            }
-          } else {
-           contentWrapper.innerHTML = '';
-           contentWrapper.classList.add('content-wrapper-center');
-           const finishedGame = document.createElement('div');
-           finishedGame.classList.add('finish-game');
-           contentWrapper.append(finishedGame);
-           const finishedGameText = document.createElement('h3');
-           finishedGameText.setAttribute('class', 'finish-text');
-           if (errors > 0) {
-            finishedGameText.textContent = `Oops! You finished game with ${errors === 1 ? '1 error' : `${errors} errors`}! Try it again!`
-            playSound('failure');
-          } else {
-            finishedGameText.textContent = `Congratulations! You finished game without errors!`;
-            playSound('success');
-          }
-           finishedGame.append(finishedGameText);
-           const finishedGameImage = document.createElement('img');
-           finishedGameImage.setAttribute('src', `/assets/images/cards/${errors > 0 ? 'failure' : 'winner'}.jpg`)
-           finishedGameImage.setAttribute('alt', `${errors > 0 ? 'failure' : 'winner'}`)
-           finishedGameImage.setAttribute('class', `finish-image`);
-           finishedGame.append(finishedGameImage);
-           setTimeout(() => {
-            isGameStart = false;
-            errors = 0;
-            currentCardIndex = 0;
-            randomCards = [];
-            renderContent();
-           }, 3000);
-          };
-        };
+          playGame(event.currentTarget);
+        }
       });
       cardPlayElement.append(cardElementImage);
       return cardPlayElement;
@@ -759,16 +766,14 @@ function playSound(word) {
   const audio = new Audio();
   audio.src = `assets/audio/${word}.mp3`;
   audio.play();
-  return;
 }
 
 function startGame(param) {
   const cardsOfCategory = cards.filter((card) => card.id === param);
   randomCards = shuffle(cardsOfCategory);
-  playSound(randomCards[currentCardIndex].word)
+  playSound(randomCards[currentCardIndex].word);
   isGameStart = true;
-  return; 
-};
+}
 
 function shuffle(arr) {
   let j;

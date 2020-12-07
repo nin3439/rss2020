@@ -23,7 +23,9 @@ header {
 }
 
 .title {
-  color: rgba(0, 0, 0, 0.803);
+  font-size: 45px;
+  color: #fffffff0;
+  text-shadow: 1px 1px 2px black;
 }
 
 .menu-button {
@@ -151,9 +153,8 @@ header {
   }
 
   .active-link {
-    color: red;
+    color: rgba(255, 0, 34, 0.94);
   }
-
 
 /* style switchButton take on page https://codepen.io/daviddarnes/pen/LdGYVG */
 .check {
@@ -298,7 +299,6 @@ span {
 }
 
 .categories:hover {
-  /* box-shadow: 0 2px 20px 7px rgba(13, 13, 13, 0.5); */
   transform: scale(1.1);
   transition: transform 0.3s;
 }
@@ -419,14 +419,18 @@ span {
 
 .footer {
   width: 100%;
-  height: 70px;
+  height: 50px;
   background-color: rgba(247, 247, 247, 0.637);
   position: fixed;
   bottom: 0;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   z-index: 6;
+}
+
+.footer-play {
+  height: 70px;
 }
 
 .footer-text {
@@ -455,9 +459,6 @@ span {
   background-image: url('/assets/images/icons/play-button.svg');
   border-radius: 50%;
   cursor: pointer;
-  position: absolute;
-  top: 0;
-  left: 50%;
 }
 
 .repeat-button {
@@ -475,20 +476,29 @@ span {
   outline: none;
 }
 
+.error-stars {
+  position: absolute;
+  right: 55%;
+  bottom: 15px;
+  display: flex;
+}
+
+.win-stars {
+  position: absolute;
+  left: 55%;
+  bottom: 15px;
+  display: flex;
+}
+
 .star {
   width: 40px;
   height: 40px;
+  filter: drop-shadow(1px 1px 2px black);
 }
 
 .disable-card {
   opacity: 0.6;
   pointer-events: none;
-}
-
-.content-wrapper-center {
-  width: 100%;
-  height: 100%;
-  padding-bottom: 0;
 }
 
 .finish-game {
@@ -499,18 +509,72 @@ span {
 }
 
 .finish-image {
- width: 700px;
+  width: 700px;
 }
 
 .finish-text {
-  color: rgba(255, 0, 35, 0.94);
+ color: rgba(255, 0, 34, 0.94);
  font-size: 25px;
  text-shadow: 1px 1px 2px black;
  margin-bottom: 30px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 725px) {
   .title {
     display: none;
+  }
+
+  .finish-text {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .finish-image {
+    width: 500px;
+  }
+
+  .star {
+    width: 30px;
+    height: 30px;
+  }
+
+  .error-stars {
+    right: 57%;
+    display: flex;
+    flex-wrap: wrap;
+    
+  }
+
+  .win-stars {
+    left: 57%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 525px) {
+  .finish-text {
+    font-size: 16px;
+  }
+
+  .finish-image {
+    width: 300px;
+  }
+
+  .star {
+    width: 20px;
+    height: 20px;
+  }
+
+  .error-stars {
+    right: 62%;
+    display: flex;
+    flex-wrap: wrap;   
+  }
+
+  .win-stars {
+    left: 62%;
+    display: flex;
+    flex-wrap: wrap;
   }
 }
