@@ -81,12 +81,12 @@ header {
 .toggle .line-3 {
 	background-color: #c0c0c0;
 	transform: scale(0.9) rotateZ(45deg) translate(-8px, -4px);
-    transition: 0.5s;
+  transition: 0.5s;
 }
 
 .menu-item{
-    list-style: none;
-    margin: 10px;
+  list-style: none;
+  margin: 10px;
 }
 
 .menu-image {
@@ -96,26 +96,27 @@ header {
 }
 
 .menu-link {
-    text-decoration: none;
-    font-size: 20px;
-    color: #ffec44;
-    letter-spacing: 1px;
-    position: relative;
-    padding: 7px 0;
-    display: flex;
-    align-items: center;
+  text-decoration: none;
+  font-size: 20px;
+  color: #ffec44;
+  letter-spacing: 1px;
+  position: relative;
+  padding: 7px 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
 .menu-link::before,
 .menu-link::after {
-    content: "";
-    width: 100%;
-    height: 1px;
-    background-color: #f7e864;
-    position: absolute;
-    right: 0;
-    transform: scaleX(0);
-    transition: transform 0.5s;
+  content: "";
+  width: 100%;
+  height: 1px;
+  background-color: #f7e864;
+  position: absolute;
+  right: 0;
+  transform: scaleX(0);
+  transition: transform 0.5s;
 }
 
 .menu-link::after {
@@ -124,36 +125,36 @@ header {
 }
 
 .menu-link::before{
-   top: 0;
-   transform-origin: left;
+  top: 0;
+  transform-origin: left;
 }
 
 .menu-link:hover::before,
 .menu-link:hover::after {
-    transform: scaleX(1);
+  transform: scaleX(1);
 }
 
-  .active {
+.active {
     color: red;
   }
 
-  .overlay {
-    background-color: rgba(61, 61, 61, 0.2);
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 5;
-    transition: 0.5s ease;
+.overlay {
+  background-color: rgba(61, 61, 61, 0.2);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  transition: 0.5s ease;
   }
   
-  .disable-body {
-    overflow: hidden;
+.disable-body {
+  overflow: hidden;
   }
 
-  .active-link {
-    color: rgba(255, 0, 34, 0.94);
+.active-link {
+  color: rgba(255, 0, 34, 0.94);
   }
 
 /* style switchButton take on page https://codepen.io/daviddarnes/pen/LdGYVG */

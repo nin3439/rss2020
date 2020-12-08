@@ -20,6 +20,7 @@ menuList.addEventListener('click', (event) => {
   const { target } = event;
   if (target.tagName !== 'A') return;
   highlight(target);
+  onNavigate(target.id);
   navbar.classList.toggle('toggle');
   overlay.classList.toggle('none');
   document.body.classList.toggle('disable-body');
