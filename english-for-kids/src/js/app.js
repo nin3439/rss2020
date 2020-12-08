@@ -1,3 +1,5 @@
+/* eslint no-use-before-define: ["error", { "functions": false }] */
+
 const menuButton = document.querySelector('.menu-button');
 const overlay = document.querySelector('.overlay');
 const navbar = document.querySelector('.menu');
@@ -15,49 +17,6 @@ let selectedLink = mainPage;
 let randomCards = [];
 let currentCardIndex = 0;
 let errors = 0;
-
-menuList.addEventListener('click', (event) => {
-  const { target } = event;
-  if (target.tagName !== 'A') return;
-  highlight(target);
-  onNavigate(target.id);
-  navbar.classList.toggle('toggle');
-  overlay.classList.toggle('none');
-  document.body.classList.toggle('disable-body');
-});
-
-function highlight(link) {
-  if (selectedLink) {
-    selectedLink.classList.remove('active-link');
-    selectedLink = link;
-    selectedLink.classList.add('active-link');
-  }
-}
-
-switchButton.addEventListener('click', () => {
-  if (isTrain) {
-    trainPart.classList.add('none');
-    playPart.classList.remove('none');
-    isTrain = false;
-  } else {
-    playPart.classList.add('none');
-    trainPart.classList.remove('none');
-    isTrain = true;
-  }
-  renderContent(window.location.pathname.slice(1));
-});
-
-menuButton.addEventListener('click', () => {
-  navbar.classList.toggle('toggle');
-  overlay.classList.toggle('none');
-  document.body.classList.toggle('disable-body');
-});
-
-overlay.addEventListener('click', () => {
-  navbar.classList.toggle('toggle');
-  document.body.classList.toggle('disable-body');
-  overlay.classList.toggle('none');
-});
 
 const categories = [
   {
@@ -563,73 +522,10 @@ const cards = [
   },
 ];
 
-function renderContent(param) {
-  contentWrapper.innerHTML = '';
-  contentWrapper.classList.add('content-wrapper');
-  const footerElement = document.createElement('footer');
-  footerElement.setAttribute('class', 'footer');
-  contentWrapper.append(footerElement);
-  const footerTextElement = document.createElement('div');
-  footerTextElement.setAttribute('class', 'footer-text');
-  footerTextElement.innerHTML = `<a class="footer-link" href="https://rs.school/js/" class><img src="/assets/images/icons/rs_school_js.svg" alt="RSS Icon" class="rss-image"></a> 
-  <div class="created-person"> 2020 Created by <a class="footer-link" href="https://github.com/nin3439">nin3439</a></div>
-  `;
-  footerElement.append(footerTextElement);
-  if (param) {
-    const cardsOfCategory = cards.filter((card) => card.id === param);
-    const cardsElements = getCardsElements(cardsOfCategory);
-    cardsElements.forEach((item) => contentWrapper.append(item));
-    if (!isTrain) {
-      footerElement.innerHTML = '';
-      footerElement.classList.add('footer-play');
-      const playButtonElement = document.createElement('button');
-      playButtonElement.setAttribute('class', 'play-button');
-      footerElement.append(playButtonElement);
-      const starErrorElement = document.createElement('div');
-      starErrorElement.setAttribute('class', 'error-stars');
-      footerElement.append(starErrorElement);
-      const starWinElement = document.createElement('div');
-      starWinElement.setAttribute('class', 'win-stars');
-      footerElement.append(starWinElement);
-      playButtonElement.addEventListener('click', () => {
-        if (!isGameStart) {
-          playButtonElement.classList.add('repeat-button');
-          startGame(param);
-        } else {
-          playSound(randomCards[currentCardIndex].word);
-        }
-      });
-    }
-  } else {
-    const categoriesElements = getCategoriesElement();
-    categoriesElements.forEach((item) => contentWrapper.append(item));
-  }
-  return contentWrapper;
-}
-
-function getCategoriesElement() {
-  const categoriesElemets = categories.map((item) => {
-    const categoryElement = document.createElement('div');
-    categoryElement.classList.add('categories');
-    categoryElement.id = item.id;
-    categoryElement.onclick = function onNav() {
-      onNavigate(`/${item.id}`);
-    };
-    const categoryElementImage = document.createElement('img');
-    categoryElementImage.setAttribute('src', `${item.image}`);
-    categoryElementImage.setAttribute('alt', `${item.word}`);
-    categoryElementImage.setAttribute('class', 'categories__image');
-    categoryElement.append(categoryElementImage);
-    const categoryElementCircle = document.createElement('div');
-    categoryElementCircle.setAttribute('class', `${isTrain ? 'circle-train' : 'circle-play'}`);
-    categoryElement.append(categoryElementCircle);
-    const categoryElementTitle = document.createElement('h3');
-    categoryElementTitle.setAttribute('class', 'categories__title');
-    categoryElementTitle.textContent = item.title;
-    categoryElement.append(categoryElementTitle);
-    return categoryElement;
-  });
-  return categoriesElemets;
+function playSound(word) {
+  const audio = new Audio();
+  audio.src = `assets/audio/${word}.mp3`;
+  audio.play();
 }
 
 function playGame(currentTarget) {
@@ -763,29 +659,48 @@ function getCardsElements(cardsOfCategory) {
   return cardsElements;
 }
 
-function playSound(word) {
-  const audio = new Audio();
-  audio.src = `assets/audio/${word}.mp3`;
-  audio.play();
-}
-
-function startGame(param) {
-  const cardsOfCategory = cards.filter((card) => card.id === param);
-  randomCards = shuffle(cardsOfCategory);
-  playSound(randomCards[currentCardIndex].word);
-  isGameStart = true;
-}
-
-function shuffle(arr) {
-  let j;
-  let template;
-  for (let i = arr.length - 1; i > 0; i--) {
-    j = Math.floor(Math.random() * (i + 1));
-    template = arr[j];
-    arr[j] = arr[i];
-    arr[i] = template;
+function renderContent(param) {
+  contentWrapper.innerHTML = '';
+  contentWrapper.classList.add('content-wrapper');
+  const footerElement = document.createElement('footer');
+  footerElement.setAttribute('class', 'footer');
+  contentWrapper.append(footerElement);
+  const footerTextElement = document.createElement('div');
+  footerTextElement.setAttribute('class', 'footer-text');
+  footerTextElement.innerHTML = `<a class="footer-link" href="https://rs.school/js/" class><img src="/assets/images/icons/rs_school_js.svg" alt="RSS Icon" class="rss-image"></a> 
+  <div class="created-person"> 2020 Created by <a class="footer-link" href="https://github.com/nin3439">nin3439</a></div>
+  `;
+  footerElement.append(footerTextElement);
+  if (param) {
+    const cardsOfCategory = cards.filter((card) => card.id === param);
+    const cardsElements = getCardsElements(cardsOfCategory);
+    cardsElements.forEach((item) => contentWrapper.append(item));
+    if (!isTrain) {
+      footerElement.innerHTML = '';
+      footerElement.classList.add('footer-play');
+      const playButtonElement = document.createElement('button');
+      playButtonElement.setAttribute('class', 'play-button');
+      footerElement.append(playButtonElement);
+      const starErrorElement = document.createElement('div');
+      starErrorElement.setAttribute('class', 'error-stars');
+      footerElement.append(starErrorElement);
+      const starWinElement = document.createElement('div');
+      starWinElement.setAttribute('class', 'win-stars');
+      footerElement.append(starWinElement);
+      playButtonElement.addEventListener('click', () => {
+        if (!isGameStart) {
+          playButtonElement.classList.add('repeat-button');
+          startGame(param);
+        } else {
+          playSound(randomCards[currentCardIndex].word);
+        }
+      });
+    }
+  } else {
+    const categoriesElements = getCategoriesElement();
+    categoriesElements.forEach((item) => contentWrapper.append(item));
   }
-  return arr;
+  return contentWrapper;
 }
 
 const routes = {
@@ -800,12 +715,100 @@ const routes = {
   '/emotions': () => renderContent('emotions'),
 };
 
-rootDiv.append(routes[window.location.pathname]());
-
 const onNavigate = (pathname) => {
   window.history.pushState({}, pathname, window.location.origin + pathname);
   rootDiv.append(routes[pathname]());
 };
+
+function getCategoriesElement() {
+  const categoriesElemets = categories.map((item) => {
+    const categoryElement = document.createElement('div');
+    categoryElement.classList.add('categories');
+    categoryElement.id = item.id;
+    categoryElement.onclick = function onNav() {
+      onNavigate(`/${item.id}`);
+    };
+    const categoryElementImage = document.createElement('img');
+    categoryElementImage.setAttribute('src', `${item.image}`);
+    categoryElementImage.setAttribute('alt', `${item.word}`);
+    categoryElementImage.setAttribute('class', 'categories__image');
+    categoryElement.append(categoryElementImage);
+    const categoryElementCircle = document.createElement('div');
+    categoryElementCircle.setAttribute('class', `${isTrain ? 'circle-train' : 'circle-play'}`);
+    categoryElement.append(categoryElementCircle);
+    const categoryElementTitle = document.createElement('h3');
+    categoryElementTitle.setAttribute('class', 'categories__title');
+    categoryElementTitle.textContent = item.title;
+    categoryElement.append(categoryElementTitle);
+    return categoryElement;
+  });
+  return categoriesElemets;
+}
+
+function shuffle(arr) {
+  let j;
+  let template;
+  const newArr = arr;
+  for (let i = newArr.length - 1; i > 0; i -= 1) {
+    j = Math.floor(Math.random() * (i + 1));
+    template = newArr[j];
+    newArr[j] = newArr[i];
+    newArr[i] = template;
+  }
+  return newArr;
+}
+
+function startGame(param) {
+  const cardsOfCategory = cards.filter((card) => card.id === param);
+  randomCards = shuffle(cardsOfCategory);
+  playSound(randomCards[currentCardIndex].word);
+  isGameStart = true;
+}
+
+function highlight(link) {
+  if (selectedLink) {
+    selectedLink.classList.remove('active-link');
+    selectedLink = link;
+    selectedLink.classList.add('active-link');
+  }
+}
+
+menuList.addEventListener('click', (event) => {
+  const { target } = event;
+  if (target.tagName !== 'A') return;
+  highlight(target);
+  onNavigate(target.id);
+  navbar.classList.toggle('toggle');
+  overlay.classList.toggle('none');
+  document.body.classList.toggle('disable-body');
+});
+
+switchButton.addEventListener('click', () => {
+  if (isTrain) {
+    trainPart.classList.add('none');
+    playPart.classList.remove('none');
+    isTrain = false;
+  } else {
+    playPart.classList.add('none');
+    trainPart.classList.remove('none');
+    isTrain = true;
+  }
+  renderContent(window.location.pathname.slice(1));
+});
+
+menuButton.addEventListener('click', () => {
+  navbar.classList.toggle('toggle');
+  overlay.classList.toggle('none');
+  document.body.classList.toggle('disable-body');
+});
+
+overlay.addEventListener('click', () => {
+  navbar.classList.toggle('toggle');
+  document.body.classList.toggle('disable-body');
+  overlay.classList.toggle('none');
+});
+
+rootDiv.append(routes[window.location.pathname]());
 
 window.onpopstate = () => {
   rootDiv.append(routes[window.location.pathname]());
