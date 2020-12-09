@@ -16,8 +16,7 @@ module.exports = {
           patterns: [
             { from: "./src/assets", to: "./assets" },
             "./src/style.css",
-            "./src/index.html",
-            "./src/cards.json"
+            "./src/index.html"
           ],
         }),
         new ESLintPlugin()  

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint --ignore-pattern src/assets --ignore-pattern src/*.css --ignore-pattern src/*.html --ignore-pattern src/*.json src/** --fix",
+    "lint": "eslint --ignore-pattern src/assets --ignore-pattern src/*.css --ignore-pattern src/*.html src/** --fix",
     "build": "webpack --config webpack.config.js",
     "start": "webpack serve --config ./webpack.config.js --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
