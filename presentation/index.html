@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/blood.css" id="theme" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link
+      rel="stylesheet"
+      href="plugin/highlight/monokai.css"
+      id="highlight-theme"
+    />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>React</h1>
+          <img
+            src="./images/react.png"
+            alt="Logo React"
+            height="400"
+            width="400"
+          />
+        </section>
+        <section>
+          <h5>What is React?</h5>
+          <div class="fragment">
+            <p>
+              It is an open-source, front end, JavaScript library for building
+              user interfaces.
+            </p>
+            <img
+              src="images/react-components.png"
+              alt="React Dashboard"
+            />
+          </div>
+        </section>
+        <section>
+          <div class="row">
+            <div class="column">
+              <img
+                src="images/jordan-walke.jpg"
+                alt="Jordan Walke"
+                height="500"
+                width="400"
+              />
+              <p>Jordan Walke</p>
+            </div>
+            <img
+              class="fragment"
+              src="images/facebook-logo.png"
+              alt="Facebook"
+              height="300"
+              width="300"
+            />
+          </div>
+        </section>
+        <section>
+          <h5>Basic usage</h5>
+          <pre><code data-trim data-line-numbers="1-11|5-7|9|11|1">
+            <div id="root"></div>
+
+            <script type="text/babel">
+
+                function Greeter(props) {
+                    return <h1>{props.greeting}</h1>
+                }
+
+                const App = <Greeter greeting="Hello World!" />;
+
+                ReactDOM.render(App, document.getElementById('root'));
+
+            </script>
+                </code></pre>
+        </section>
+        <section>
+            <p>Result in the web browser</p>
+          <pre><code data-trim>
+            <div id="root">
+                <h1>Hello World!</h1>
+            </div>
+          </code></pre>
+          <img
+          src="images/hello.PNG"
+          alt="Result"
+        />
+        </section>
+        <section>
+            <h5>Notable features:</h5>
+            <ul>
+             <li>JSX</li>
+             <li>Virtual DOM</li>
+             <li>Components</li>
+             <li>Props</li>
+             <li>State</li>
+             <li>Lifecycle methods</li>
+             <li>Hooks</li>
+            </ul>
+        </section>
+        <section>
+            <h5>JSX</h5>
+            <pre><code data-trim>
+                class App extends React.Component {
+                      render() {
+                       return (
+                          <div>
+                           <p>Header</p>
+                           <p>Content</p>
+                           <p>Footer</p>
+                          </div>
+                        );
+                    }
+                }
+            </code></pre>
+        </section>
+        <section>
+            <h5>Virtual DOM</h5>
+            <img
+            src="images/virtualDOM.png"
+            alt="Virtual DOM"
+            height="500px"
+          />
+        </section>
+        <section>
+            <section>
+                <h4>Components</h4>
+                <img
+                src="images/components.png"
+                alt="Components"
+              />
+            </section>
+          <section>
+            <p> In React, we have mainly two types of components</p>
+            <div>
+                <div class="fragment">
+                    Functional Components
+                    <pre><code data-trim>
+                        function Welcome(props) {
+                            return <h1>Привет, {props.name}</h1>;
+                          }
+                    </code></pre>
+                </div>
+                <div class="fragment">
+                    Class-based components
+                    <pre><code data-trim>
+                        class Welcome extends React.Component {
+                            render() {
+                              return <h1>Привет, {this.props.name}</h1>;
+                            }
+                          }
+                    </code></pre>
+                </div>
+            </div>
+        </section>
+        </section>
+        <section>
+                <h5>Props</h5>
+                <pre><code data-trim class="fragment">
+                    ReactDOM.render(  
+                        <Hello message="my friend" />,   
+                        document.getElementById("root")  
+                    );
+                </code></pre>
+                <pre><code data-trim class="fragment">
+                    class Hello extends React.Component {  
+                        render() {  
+                            return <h1>Hello {this.props.message}!</h1>;  
+                        }  
+                    }
+                </code></pre>
+            </section>
+            <section>
+                <h5>State</h5>
+                <pre><code class="state" data-trim>
+                    class Example extends React.Component {
+                        constructor(props) {
+                          super(props);
+                          this.state = {
+                            count: 0
+                          };
+                        }
+                      
+                        render() {
+                          return (
+                            <div>
+                              <p>You clicked {this.state.count} times</p>
+                              <button onClick={() => this.setState({ count: this.state.count + 1 })}>
+                                Click me
+                              </button>
+                            </div>
+                          );
+                        }
+                      }
+                </code></pre>
+            </section>
+        <section>
+            <h5>Lifecycle</h5>
+            <img
+            src="images/lifecycle.jpg"
+            alt="Lifecycle"
+          />
+        </section>
+        <section>
+            <section class="text-center">
+                <h5>Hooks</h5>
+                <p class="hooks-title">Basic Hooks</p>
+                <ul> 
+                    <li>useState</li>
+                    <li>useEffect</li>
+                    <li>useContext</li>
+                </ul>
+                <p class="hooks-title mini-size">Additional Hooks</p>
+                <ul class="mini-size"> 
+                    <li>useReducer</li>
+                    <li>useCallback</li>
+                    <li>useMemo</li>
+                    <li>useRef</li>
+                    <li>useImperativeHandle</li>
+                    <li>useLayoutEffect</li>
+                    <li>useDebugValue</li>
+                </ul>
+            </section>
+            <section>
+                <p>UseState</p>
+                <pre><code data-trim class="fragment">
+                    class Example extends React.Component {
+                        constructor(props) {
+                          super(props);
+                          this.state = {
+                            count: 0
+                          };
+                        }
+                </code></pre>
+                <pre><code data-trim class="fragment">
+                    import React, { useState } from 'react';
+
+                    function Example() {
+                        const [count, setCount] = useState(0);
+                    }
+                </code></pre>
+            </section>
+        </section>
+        <section>
+            <img
+            src="images/thanks.jpg"
+            alt="Thanks"
+          />
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
